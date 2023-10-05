@@ -1,0 +1,35 @@
+<section class="d-grid px-5">
+    <div class="d-flex justify-content-center my-3" >
+        <img [src]="imageLogo" class="w_100" >
+    </div>
+    <div class="text-center my-4">
+        <h1>Iniciar sesión</h1>
+    </div>
+    <!--Aqui se valida la informacion del formulario-->
+    <form (ngSubmit)="login()" [formGroup]="users">
+        <div class="">
+            <div class="">
+                <label for="" class="font_text_label my-3">Correo Electrónico</label>
+                <input type="email" placeholder="Example@sambaproduce.com" formControlName="userEmail" class="form-control py-2 font_text_placeholder">
+            </div>
+
+            <div class="">
+                <label for="" class="font_text_label my-3">Contraseña</label>
+                <input type="password" placeholder="Ingrese su contraseña" formControlName="userPassword" class="form-control py-2 font_text_placeholder">
+            </div>
+
+            <div class="my-4">
+                <a href="" class="font_text_a text-decoration-none">¿Olvidó su contraseña?</a>
+            </div>
+
+            <div class="button">
+                <button class="botton_primary py-1 w-100" type="submit">Iniciar sesión</button>
+            </div>
+
+            <div class="d-flex my-4 justify-content-between me-5 ">
+                <p class="font_text_a">¿No tienes una cuenta?</p>
+                <a href="" class="font_text_a text-decoration-none weight" routerLink="/samba-register-page">Regístrate</a>
+            </div>
+        </div>
+    </form>
+</section>

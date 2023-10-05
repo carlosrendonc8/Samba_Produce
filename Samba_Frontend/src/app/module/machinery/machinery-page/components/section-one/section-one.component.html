@@ -1,0 +1,46 @@
+<section class="d-grid">
+    <div class="d-flex justify-content-center mx-5">
+        <div class="col-3 underline_end"></div>      
+            <div class="col-6">
+                <h1 class="text-center mt-5 ">MAQUINARIA E IMPLEMENTOS</h1>
+            </div>
+        <div class="col-3 underline_end"></div>      
+    </div>
+
+    <div class="d-flex justify-content-around m-5">
+
+        <a *ngFor="let machinery of typeMachine; let i = index" (click)="prueba(i)" class="border square col-2 interaction text-decoration-none text-black rout" routerLink="/samba-list-machinery-page">
+            <div class="d-flex align-items-center p-4">
+                <img class="image_one border_radius w-100" [src]="imageN1" alt="">
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <h4 class="m-3">{{machinery.typeMachinaryName}}</h4>
+            </div> 
+
+            <div [ngSwitch]="machinery.typeMachinaryStatus" class="d-flex justify-content-center px-3">
+                <div *ngSwitchCase="'Advertencia'" class="w-100 border_top_advertencia py-3 px-2">
+                    <div  class="m-1 width_div">                  
+                       <div class="p-1 width_div border_status bg_status_advertencia">
+                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
+                       </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'Pendiente'" class="w-100 border_top_pendiente py-3 px-2">
+                    <div  class="m-1 width_div">                  
+                       <div class="p-1 width_div border_status bg_status_pendiente">
+                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
+                       </div>
+                    </div>
+                </div>
+                <div *ngSwitchDefault class="w-100 border_top py-3 px-2">
+                    <div  class="m-1 width_div">                  
+                       <div class="p-1 width_div border_status bg_status">
+                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
+                       </div>
+                    </div>
+                </div>
+            </div>       
+        </a>
+    </div>  
+</section>

@@ -1,0 +1,44 @@
+:root{
+    --color_black:black;
+    --color_one:#D0EB5C;
+    --color_two:#007E00;
+    --color_three:#6DF754;
+    --color_four:#57db40;
+    --color_five: #69BE69;
+}
+
+.botton_primary {
+    font-size: calc(0.7em + 0.7vw);
+    background-color: var(--color_one);
+    border-radius: 10px;
+    border-color: var(--color_two);
+}
+.botton_primary:hover{
+    background-color: var(--color_three);
+}
+.botton_primary:focus{
+    background-color: var(--color_four);
+}
+
+.font_text_label{
+    font-size: calc(0.7em + 0.7vw);
+}
+.font_text_a{
+    font-size: calc(0.5em + 0.5vw);
+    color: var(--color_black);
+}
+.font_text_placeholder{
+    font-size: calc(0.6em + 0.6vw);
+}
+
+
+@media screen and (max-width: 900px){
+    .d_none_m{
+        display: none;
+    }
+    .col_100{
+        width: 100%;
+    }
+}
+
+

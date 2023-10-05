@@ -1,0 +1,45 @@
+@import url(/src/styles.scss);
+
+.mmmm
+{
+    font-size: 30px;
+    color: var(--color_two)
+}
+
+.w_100
+{
+    width: 60%;
+
+}
+
+.nav-link{
+  color: black;
+  font-size: 22px;
+}
+
+
+.nav-link:hover {
+  color: var(--color_two); 
+  text-decoration: underline; 
+}
+
+
+.pepe
+{
+  background-color: #F6E967;
+  height: 50px;
+}
+
+.logo{
+  margin-right: 40px;
+}
+
+i{
+  font-size: 30px;
+  color: var(--color_two);
+}
+
+.dropdown-menu{
+  background-color: #F6E967;
+  text-decoration: none;
+}

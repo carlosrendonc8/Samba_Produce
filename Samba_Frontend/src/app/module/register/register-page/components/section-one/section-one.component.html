@@ -1,0 +1,90 @@
+<section class="d-grid px-5">
+    <div class="d-flex justify-content-center">
+        <img [src]="imageLogo" class="w_100">
+    </div>
+    <div class="text-center my-3">
+        <h1>Registrate</h1>
+    </div>
+
+    <form (ngSubmit)="createUser()" [formGroup]="users">
+        <div>
+            <div class="d-flex justify-content-between">
+                <div class="col-5">
+                    <label for="" class="font_text_label my-3">Nombre</label>
+                    <input type="name" placeholder="Ingrese su Nombre" formControlName="userName" class="form-control py-2">
+                </div>
+
+                <div class="col-6">
+                    <label for="" class="font_text_label my-3">Apellido</label>
+                    <input type="text" placeholder="Ingrese su Apellido" formControlName="userLastName" class="form-control py-2">
+                </div>
+            </div>
+
+            <div class="">
+                <label for="" class="font_text_label my-2">Correo Electrónico</label>
+                <input type="email" placeholder="Example@sambaproduce.com" formControlName="userEmail" class="form-control py-2">
+            </div>
+
+            <div class="">
+                <label for="" class="font_text_label my-2">Contraseña</label>
+                <input type="password" placeholder="Ingrese su contraseña" formControlName="userPassword" class="form-control py-2">
+            </div>
+
+            <div class="d-flex my-4 justify-content-between">
+                <div class="col-5">
+                    <label for="" class="font_text_label">No. Identificación 
+                    </label>
+                    <input type="tel" placeholder="Ingrese su Id" formControlName="userIdentification" class="form-control py-2">
+                </div>
+
+                <div class="col-6">
+                    <label for="" class="font_text_label">No. Teléfono</label>
+                    <input type="tel" placeholder="Ingrese su Telefono" formControlName="userPhoneNumber" class="form-control py-2"> 
+                </div>
+            </div>
+            <div class="button">
+                <button class="botton_primary py-1 w-100" type="submit">Guardar</button>
+            </div>
+        </div>
+    </form>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

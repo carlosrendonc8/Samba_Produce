@@ -1,0 +1,38 @@
+*{
+    list-style-type: none;
+    color: black; 
+}
+.bg_color{
+    font-family: inherit;
+    background-color: #F5E05D; 
+}
+.row{
+    display: flex;
+}
+i{
+    font-size: 220%;
+}
+.footer_links ul li a{
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 300;
+    padding-left: 29%;
+}
+.footer_options ul li a{
+    text-decoration: none;
+    font-weight: 300;
+}
+.p_0{ 
+    padding: 0; 
+    margin-top: 10px;
+}
+.t_1{
+    margin-left: 15%;
+    margin-bottom: 3%;
+}
+.font_size{
+    font-size: 150%;
+    font-weight: 300;
+}
+
+
