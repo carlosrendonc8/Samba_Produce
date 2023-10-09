@@ -17,9 +17,10 @@ const routes: Routes = [
 
   { path: 'samba-register-activity-page', loadChildren: () =>
   import('./module/register-activity/register-activity.module').then( m => m.RegisterActivityModule)},
-
   { path: 'samba-edit-machinery-page', loadChildren: () =>
     import( './module/edit-machinery/edit-machinery.module').then( m => m.EditMachineryModule)}
+  { path: 'samba-maintenance-register-page', loadChildren: () =>
+  import('./module/maintenance-register/maintenance-register.module').then( m => m.MaintenanceRegisterModule)},
 ];
 
 @NgModule({
