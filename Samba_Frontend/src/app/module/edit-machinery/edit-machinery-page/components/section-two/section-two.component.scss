@@ -1,0 +1,26 @@
+.btn_1 {
+    width: 600px;
+    height: 45%;
+}
+
+.w_100{
+    width: 65%;
+}
+
+.botton_guardar{
+    margin-top: 65px;
+    margin-bottom: 40px;
+}
+
+.botton_guardar {
+    font-size: calc(0.7em + 0.7vw);
+    background-color: var(--color_one);
+    border-radius: 10px;
+    border-color: var(--color_two);
+}
+.botton_guardar:hover{
+    background-color: var(--color_three);
+}
+.botton_guardar:focus{
+    background-color: var(--color_four);
+}

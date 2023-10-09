@@ -12,7 +12,7 @@ import { ReadListMachineryService } from './list-machinery-page/components/servi
 @NgModule({
   declarations: [
     ListMachineryPageComponent,
-    SectionOneComponent  
+    SectionOneComponent
   ],
   
   imports: [
