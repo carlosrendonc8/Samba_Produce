@@ -26,12 +26,12 @@ export class SectionTwoComponent {
     const params = {userEmail,userPassword }
 
     this.userServiceService.userService(params).subscribe(
-      (response) => console.log(response)
+      (response) => {
+        console.log(response)
+        this.router.navigateByUrl('/samba-machinery-page');
+
+      }
     );
     
-    if(this.users.valid){
-      this.router.navigateByUrl('/samba-machinery-page');
-    }
-
   }
 }
