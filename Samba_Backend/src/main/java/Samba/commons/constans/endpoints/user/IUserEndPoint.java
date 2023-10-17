@@ -1,7 +1,7 @@
 package Samba.commons.constans.endpoints.user;
 
 public interface IUserEndPoint {
-    String BASE_URL_USER = "/create";
+    String BASE_URL_USER = "/user";
     String CREATE_USER = "/create";
     String SERVICE_VALIDATION_USER = "/service";
     String UPDATE_USER = "/update";
