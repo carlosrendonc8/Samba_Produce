@@ -27,9 +27,8 @@ export class SectionTwoComponent {
 
     this.userServiceService.userService(params).subscribe(
       (response) => {
-        console.log(response)
+        console.log("prueba login" + response)
         this.router.navigateByUrl('/samba-machinery-page');
-
       }
     );
     
