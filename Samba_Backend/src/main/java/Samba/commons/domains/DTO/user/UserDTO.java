@@ -16,8 +16,6 @@ public class UserDTO implements Serializable {
 
     private Integer userId;
 
-    private String userTipeId;
-
     private String userName;
 
 
@@ -37,13 +35,6 @@ public class UserDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserTipeId() {
-        return userTipeId;
-    }
-
-    public void setUserTipeId(String userTipeId) {
-        this.userTipeId = userTipeId;
-    }
 
     public String getUserLastName() {
         return userLastName;
