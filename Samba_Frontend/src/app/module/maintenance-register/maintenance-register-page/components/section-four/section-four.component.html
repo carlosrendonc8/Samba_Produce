@@ -1,11 +1,4 @@
 <section class="d-flex flex-column text-center px-5 py-5">
-
-    <div class="d-flex justify-content-evenly py-5">
-        <a name="" id="" class="btn btn-primary boton_1 botton_primary text-black" href="#" role="button">Confirmar</a>
-        <a name="" id="" class="btn btn-primary boton_1 boton_2 botton_primary text-black" href="#" role="button">Manual
-            Tecnico</a>
-    </div>
-
     <div type="submit" *ngFor="let mantenimientoItem of mantenimientos; let i = index" class="col-12 border">
         <div class="col-12 d-flex align-items-center my-2">
             <div class="col-1">
@@ -19,5 +12,12 @@
             <p>{{mantenimientoItem.orden}} {{mantenimientoItem.descripcion}}</p>
         </div>
     </div>
+
+    <div class="d-flex justify-content-evenly py-5">
+        <a name="" id="" class="btn btn-primary boton_1 botton_primary text-black px-5" href="#" role="button">Confirmar</a>
+        <a name="" id="" class="btn btn-primary boton_1 boton_2 botton_primary text-black" href="#" role="button">Manual
+            Tecnico</a>
+    </div>
+    
 </section>
   
