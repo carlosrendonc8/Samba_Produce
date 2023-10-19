@@ -1,9 +1,7 @@
 package Samba.commons.domains.entity.machine;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.*;
 import com.fasterxml.jackson.annotation.*;
-import jakarta.persistence.*;
 import Samba.commons.domains.entity.typeMachinery.TypeMachineryEntity;
 
 @NoArgsConstructor
