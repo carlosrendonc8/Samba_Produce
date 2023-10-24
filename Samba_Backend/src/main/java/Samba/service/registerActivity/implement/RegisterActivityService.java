@@ -4,7 +4,10 @@ import Samba.commons.constans.response.registerActivity.IRegisterActivityRespons
 import Samba.commons.converter.registerActivity.RegisterActivityConverter;
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
 import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.entity.accumulatedHours.AccumulatedHoursEntity;
 import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
+import Samba.components.maintenances.MaintenancesComponents;
+import Samba.repository.accumulatedHours.IAccumulatedHoursRepository;
 import Samba.repository.registerActivity.IRegisterActivityRepository;
 import Samba.service.registerActivity.IRegisterActivityService;
 import lombok.extern.log4j.Log4j2;
@@ -18,9 +21,13 @@ import java.util.Optional;
 @Log4j2
 public class RegisterActivityService implements IRegisterActivityService {
     @Autowired
-    public IRegisterActivityRepository registerActivityRepository;
+    private IRegisterActivityRepository registerActivityRepository;
     @Autowired
-    public RegisterActivityConverter registerActivityConverter;
+    private IAccumulatedHoursRepository accumulatedHoursRepository;
+    @Autowired
+    private MaintenancesComponents maintenancesComponents;
+    @Autowired
+    private RegisterActivityConverter registerActivityConverter;
     @Override
     public ResponseEntity<GenericResponseDTO> createRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
@@ -28,6 +35,12 @@ public class RegisterActivityService implements IRegisterActivityService {
             if (!registerExist.isPresent()) {
                 RegisterActivityEntity registerActivityEntity = registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 this.registerActivityRepository.save(registerActivityEntity);
+                AccumulatedHoursEntity accumulatedHoursEntity = new AccumulatedHoursEntity();
+                accumulatedHoursEntity.setAccumulatedHoursId(0);
+                accumulatedHoursEntity.setMachineEntity(registerActivityEntity.getMachineEntity());
+                accumulatedHoursEntity.setAccumulatedHoursHours(registerActivityEntity.getRegisterActivityHours());
+                this.accumulatedHoursRepository.save(accumulatedHoursEntity);
+                //maintenancesComponents.Example(registerActivityDTO);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_SUCCESS)
                         .objectResponse(IRegisterActivityResponse.CREATE_SUCCESS)

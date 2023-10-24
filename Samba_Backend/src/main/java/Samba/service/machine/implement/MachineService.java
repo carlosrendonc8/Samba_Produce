@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -162,6 +161,35 @@ public class MachineService implements IMachineService
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.DELETE_FAIL)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            }
+        } catch (Exception e) {
+            log.error("Ha ocurrido un error interno", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(IMachineResponse.INTERNAL_SERVER)
+                            .objectResponse(null)
+                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
+    }
+
+    @Override
+    public ResponseEntity<GenericResponseDTO> readVehicleId(Integer machineId) {
+        try {
+            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineId);
+            if (vehicleExist.isPresent()) {
+                System.out.println("Entramos al Metodo");
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(IMachineResponse.OPERATION_SUCCESS)
+                        .objectResponse(vehicleExist)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            } else {
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(IMachineResponse.OPERATION_FAIL)
+                        .objectResponse(IMachineResponse.OPERATION_FAIL)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             }
