@@ -8,4 +8,5 @@ public interface IMachineEndPoint
     String READ_ALL_MACHINE = "/readAll";
     String UPDATE_MACHINE = "/update";
     String DELETE_MACHINE = "/delete";
+    String READ_MACHINE_ID = "/readMachineId{machineId}";
 }

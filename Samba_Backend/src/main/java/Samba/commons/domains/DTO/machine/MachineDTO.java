@@ -1,9 +1,6 @@
 package Samba.commons.domains.DTO.machine;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.*;
-
 import java.io.Serializable;
 
 
