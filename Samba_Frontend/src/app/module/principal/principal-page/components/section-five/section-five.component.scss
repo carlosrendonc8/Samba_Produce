@@ -1,0 +1,23 @@
+.cuadro{
+    background-color: #dfdede;
+}
+.underline_end{
+    border-bottom: 4px solid;
+    border-color: var(--color_two);
+    position: relative;
+    height: 50px;
+  }
+
+.underline_end_two{
+    border-bottom: 8px solid;
+    border-color: var(--color_two);
+  }
+  .text-center{
+    font-size: 30px;
+  }
+  .mapa{
+   margin-left: 10%;
+   margin-right: 10%;
+   margin-top: 2%;
+   margin-block-end: 2%;
+  }
