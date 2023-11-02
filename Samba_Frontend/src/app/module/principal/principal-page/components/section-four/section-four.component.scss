@@ -1,0 +1,42 @@
+.cuadro{
+    background-color: #dfdede;
+}
+.underline_end{
+    border-bottom: 4px solid;
+    border-color: var(--color_two);
+    position: relative;
+    height: 50px;
+  }
+
+.underline_end_two{
+    border-bottom: 8px solid;
+    border-color: var(--color_two);
+  }
+  .text-center{
+    font-size: 30px;
+  }
+  .edit_img{
+    left: 9%;
+    position: relative;
+    float: left;
+    
+  }
+  .edit_text{
+    margin-top: 80px;
+    font-size: 35px;
+    text-align: center;
+  }
+
+
+.edit_img1{
+    right: 9%;
+    position: relative;
+    
+    
+  }
+.edit_text1{
+    margin-top: 80px;
+    font-size: 35px;
+    text-align: center;
+    float: left;
+  }
