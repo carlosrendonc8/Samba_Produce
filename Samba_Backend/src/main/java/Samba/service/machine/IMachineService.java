@@ -11,4 +11,5 @@ public interface IMachineService
     ResponseEntity<GenericResponseDTO> readAllVehicle();
     ResponseEntity<GenericResponseDTO> updateVehicle(MachineDTO machineDTO);
     ResponseEntity<GenericResponseDTO> deleteVehicle(MachineDTO machineDTO);
+    ResponseEntity<GenericResponseDTO> readVehicleId(Integer machineId);
 }

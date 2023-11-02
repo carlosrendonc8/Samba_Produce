@@ -42,7 +42,7 @@ public class UserApi implements IUserApi {
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = IUserResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(IUserEndPoint.SERVICE_VALIDATION_USER)
+    @PostMapping(IUserEndPoint.SERVICE_VALIDATION_USER)
     public ResponseEntity<GenericResponseDTO> serviceUser(@RequestBody UserDTO userDTO) {
         return this.userService.serviceUser(userDTO);
     }

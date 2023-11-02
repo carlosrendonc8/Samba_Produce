@@ -1,0 +1,157 @@
+CREATE DATABASE samba_produce;
+
+USE samba_produce;
+
+CREATE TABLE user_samba(
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50),
+    user_lastname VARCHAR(50),
+    user_email VARCHAR(50),
+    user_password VARCHAR(50),
+    user_number VARCHAR(50)
+);
+
+CREATE TABLE type_machine_samba(
+    type_machinary_id INT AUTO_INCREMENT PRIMARY KEY,
+    type_machinary_name VARCHAR(100),
+    type_machinary_message VARCHAR(50),
+    type_machinary_status VARCHAR(50)
+);
+
+CREATE TABLE machine_samba(
+    machine_id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_name VARCHAR(100),
+    machine_plate VARCHAR(100),
+    machine_fuel VARCHAR(100),
+    machine_color VARCHAR(100),
+    machine_brand VARCHAR(100),
+    type_machinary_id INT,
+    FOREIGN KEY (type_machinary_id) REFERENCES type_machine_samba(type_machinary_id)
+);
+
+
+CREATE TABLE register_activity_samba(
+	register_activity_id INT AUTO_INCREMENT PRIMARY KEY,
+    register_activity_date DATE,
+    register_activity_hours INT,
+    register_activity_kilometers INT,
+    register_activity_accumulated_kilometers INT,
+    register_activity_accumulated_hours INT,
+    register_activity_work_realized VARCHAR(100),
+    register_activity_site_work VARCHAR(100),
+    register_activity_eventualities VARCHAR(100),
+    register_activity_implement_machine VARCHAR(100),
+    register_activity_gallons INT
+);
+
+CREATE TABLE machine_implements(
+	machine_implement_id INT AUTO_INCREMENT PRIMARY KEY,
+    machine_implement_name VARCHAR(50)
+);
+
+
+CREATE TABLE maintenances(
+	maintenances_id INT AUTO_INCREMENT PRIMARY KEY,
+	maintenances_name VARCHAR(100),
+    maintenances_hours INT
+);
+
+CREATE TABLE accumulated_hours(
+	accumulated_hours_id INT AUTO_INCREMENT PRIMARY KEY,
+    accumulated_hours_machine INT,
+    accumulated_hours_hours INT,
+    machine_id INT,
+    FOREIGN KEY (machine_id) REFERENCES machine_samba(machine_id)
+);
+
+SELECT * FROM accumulated_hours;
+
+INSERT INTO maintenances(maintenances_name, maintenances_hours) VALUES
+('Cambio de aceite motor', 250),
+('Cambio filtro de aceite', 500),
+('Cambio del filtro de combustible ', 250),
+('Cambio de aceite hidráulico ', 1000),
+('Lubricación eje delantero', 250);
+
+
+-- SELECT  rs.* FROM register_activity_samba rs JOIN machine_samba ms WHERE ms.machine_id = 1;
+
+INSERT INTO machine_implements(machine_implement_name) VALUES
+('ARADO APOLO COMPAÑIA'),
+('CAMABAJA ROJO N 1'),
+('CAMABAJA VERDE'),
+('CAMION JAC'),
+('CINCEL VIBRATORIO'),
+('EMBALCONADORA MAIZ'),
+('ESTIERCOLERA'),
+('GONDOLA #3'),
+('GONDOLA 4 RUEDAS N 3'),
+('GONDOLA N 1'),
+('GONDOLA N 2'),
+('NIVELADORA LAND PLANE N 1'),
+('PICORRI COMBINADA 1175-319 N 2'),
+('PICORRIL COMBINADA 1175-316 N 1'),
+('PICORRIL DE MAIZ 206 6 SURCOS JD'),
+('RASTRA N 3 AMARILLO'),
+('RASTRA AZUL N 1'),
+('RASTRA INTERAGRO 28 D N 5'),
+('RASTRA INTERAGRO 32 D N 4'),
+('RASTRA PULIDOR DE ALCE HIDRAULICO 3 PUNTO5'),
+('RASTRA ROJO N 2'),
+('REMOLQUE AMARILLA PEQUEÑA N 1'),
+('REMOLQUE DOS RUEDAS CONVENCIONAL'),
+('REMOLQUE FUMIGACION N 2'),
+('REMOLQUE GANADO N 3'),
+('REMOLQUE PLANCHON N 2'),
+('REMOLQUE SOTO N 1'),
+('RIEL'),
+('ROME DE TIRO 14 DISCOS'),
+('ROTO SPEED ROJO AGROTEC N2'),
+('ROTO SPEED ROJO MONTANA N1'),
+('SEMBRADORA NEUMATICA DE MAIZ'),
+('SEMBRADORA SEMEATO 17 LINEAS N 1'),
+('SEMBRADORA SEMEATO 17 LINEAS N 2'),
+('TAIPA INTERAGRO N 2'),
+('TAIPA SOTO N 1'),
+('TRANSPORTADOR BESTIAS'),
+('TRANSPORTADOR PICORRIL N1'),
+('TRANSPORTADOR PICORRIL N2'),
+('ZANJADOR AC3139'),
+('ZORRA DE ALCE HIDRAULICO PARA MAIZ 2'),
+('ZORRA DE ALCE HIDRAULICO PARA MAIZ 3'),
+('ZORRA SOTO'),
+('ZORRA');
+
+
+
+INSERT INTO type_machine_samba (type_machinary_name, type_machinary_message, type_machinary_status) VALUES
+('Volquetas', 'Ok' , 'Ok'),
+('Cosechadoras', 'Pendiente', 'Pendiente' ),
+('Tractores', 'Advertencia', 'Advertencia'),
+('Sembradoras', 'Ok', 'Ok'),
+('Vehiculos', 'Advertencia', 'Advertencia');
+
+
+-- Insertar 10 registros en machine_samba con type_machinary_id máximo de 3
+INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, type_machinary_id) VALUES
+('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 3),
+('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 3),
+('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 3),
+('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 3),
+('TRACTOR VALTRA N 2', 'GHI012', 'Diésel', 'Naranja', 'Caterpillar', 3),
+('TRACTOR VALTRA N 4', 'JKL345', 'Diésel', 'Gris', 'New Holland', 3),
+('TRACTOR CLERY RD 254A', 'PQR678', 'Gasolina', 'Rojo', 'Massey Ferguson', 3),
+('TRACTOR CASE F 35 N 1', 'VWX234', 'Diésel', 'Blanco', 'John Deere', 3),
+('TRACTOR CASE FARMALL 55', 'YZA567', 'Gasolina', 'Verde', 'Kubota', 3),
+('TRACTOR CASE F 35 N 2', 'UVW789', 'Diésel', 'Rojo', 'John Deere', 3),
+('NISSAN', 'MWM-143', 'Diésel', 'Gris', 'NISSAN', 5),
+('CAMION JAC', 'GHI678', 'Diésel', 'Gris', 'JAC', 1),
+('RETROEXCAVADORA JCB', 'GHI678', 'Diésel', 'Gris', 'JCB', 1),
+('COMBINADA JD 1175  # 1', 'VWX567', 'Diésel', 'Verde', 'John Deere', 2),
+('COMBINADA JD 1175  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 2),
+('SEMBRADORA  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 4);
+
+
+SELECT p.machine_id AS idMachine, p.machine_name AS nameMachine, p.machine_color AS colorMachine, p.machine_brand AS brandMachine
+FROM type_machine_samba c
+JOIN machine_samba p ON c.type_machinary_id = p.type_machinary_id WHERE c.type_machinary_id = 3;

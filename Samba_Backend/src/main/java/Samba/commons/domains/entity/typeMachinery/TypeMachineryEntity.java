@@ -2,7 +2,6 @@ package Samba.commons.domains.entity.typeMachinery;
 
 import jakarta.persistence.*;
 import lombok.*;
-import com.fasterxml.jackson.annotation.*;
 import Samba.commons.domains.entity.machine.MachineEntity;
 import java.util.List;
 
