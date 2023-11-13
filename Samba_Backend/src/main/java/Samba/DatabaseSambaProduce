@@ -4,27 +4,28 @@ USE samba_produce;
 
 CREATE TABLE user_samba(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(50),
-    user_lastname VARCHAR(50),
-    user_email VARCHAR(50),
-    user_password VARCHAR(50),
-    user_number VARCHAR(50)
+    user_name VARCHAR(50) NOT NULL,
+    user_lastname VARCHAR(50) NOT NULL,
+    user_email VARCHAR(50) NOT NULL,
+    user_password VARCHAR(50) NOT NULL,
+    user_number VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE type_machine_samba(
     type_machinary_id INT AUTO_INCREMENT PRIMARY KEY,
-    type_machinary_name VARCHAR(100),
-    type_machinary_message VARCHAR(50),
-    type_machinary_status VARCHAR(50)
+    type_machinary_name VARCHAR(100) NOT NULL,
+    type_machinary_message VARCHAR(50) NOT NULL,
+    type_machinary_status VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE machine_samba(
     machine_id INT AUTO_INCREMENT PRIMARY KEY,
-    machine_name VARCHAR(100),
-    machine_plate VARCHAR(100),
-    machine_fuel VARCHAR(100),
-    machine_color VARCHAR(100),
-    machine_brand VARCHAR(100),
+    machine_name VARCHAR(100) NOT NULL,
+    machine_plate VARCHAR(100) NOT NULL,
+    machine_fuel VARCHAR(100) NOT NULL,
+    machine_color VARCHAR(100) NOT NULL,
+    machine_brand VARCHAR(100) NOT NULL,
+    machine_accumulated_hours INT,
     type_machinary_id INT,
     FOREIGN KEY (type_machinary_id) REFERENCES type_machine_samba(type_machinary_id)
 );
@@ -32,39 +33,26 @@ CREATE TABLE machine_samba(
 
 CREATE TABLE register_activity_samba(
 	register_activity_id INT AUTO_INCREMENT PRIMARY KEY,
-    register_activity_date DATE,
-    register_activity_hours INT,
-    register_activity_kilometers INT,
-    register_activity_accumulated_kilometers INT,
-    register_activity_accumulated_hours INT,
-    register_activity_work_realized VARCHAR(100),
-    register_activity_site_work VARCHAR(100),
-    register_activity_eventualities VARCHAR(100),
-    register_activity_implement_machine VARCHAR(100),
-    register_activity_gallons INT
+    register_activity_date DATE NOT NULL,
+    register_activity_hours INT NOT NULL,
+    register_activity_work_realized VARCHAR(100) NOT NULL,
+    register_activity_site_work VARCHAR(100) NOT NULL,
+    register_activity_eventualities VARCHAR(100) NOT NULL,
+    register_activity_implement_machine VARCHAR(100) NOT NULL,
+    register_activity_machine_id INT NOT NULL
 );
 
 CREATE TABLE machine_implements(
 	machine_implement_id INT AUTO_INCREMENT PRIMARY KEY,
-    machine_implement_name VARCHAR(50)
+    machine_implement_name VARCHAR(50) NOT NULL
 );
 
 
 CREATE TABLE maintenances(
 	maintenances_id INT AUTO_INCREMENT PRIMARY KEY,
-	maintenances_name VARCHAR(100),
-    maintenances_hours INT
+	maintenances_name VARCHAR(100) NOT NULL,
+    maintenances_hours INT NOT NULL
 );
-
-CREATE TABLE accumulated_hours(
-	accumulated_hours_id INT AUTO_INCREMENT PRIMARY KEY,
-    accumulated_hours_machine INT,
-    accumulated_hours_hours INT,
-    machine_id INT,
-    FOREIGN KEY (machine_id) REFERENCES machine_samba(machine_id)
-);
-
-SELECT * FROM accumulated_hours;
 
 INSERT INTO maintenances(maintenances_name, maintenances_hours) VALUES
 ('Cambio de aceite motor', 250),

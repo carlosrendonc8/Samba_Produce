@@ -1,7 +1,7 @@
 package Samba.service.user;
 
 import Samba.commons.domains.DTO.user.UserDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface IUserService {

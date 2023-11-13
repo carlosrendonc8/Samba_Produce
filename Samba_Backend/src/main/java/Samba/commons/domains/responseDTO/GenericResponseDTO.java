@@ -1,4 +1,4 @@
-package Samba.commons.domains.DTO.responseDTO;
+package Samba.commons.domains.responseDTO;
 
 import jakarta.validation.constraints.AssertFalse;
 import lombok.*;

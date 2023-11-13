@@ -2,7 +2,7 @@ package Samba.webApi.user;
 
 import Samba.commons.constans.endpoints.user.IUserEndPoint;
 import Samba.commons.domains.DTO.user.UserDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

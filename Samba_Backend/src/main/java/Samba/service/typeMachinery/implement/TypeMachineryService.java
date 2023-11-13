@@ -2,7 +2,7 @@ package Samba.service.typeMachinery.implement;
 
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
 import Samba.commons.converter.typeMachinery.TypeMachineryConverter;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
 import Samba.commons.domains.entity.typeMachinery.TypeMachineryEntity;
 import Samba.repository.typeMachinery.ITypeMachineryRepository;

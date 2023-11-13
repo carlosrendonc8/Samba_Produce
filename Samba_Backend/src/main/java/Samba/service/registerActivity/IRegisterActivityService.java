@@ -1,7 +1,7 @@
 package Samba.service.registerActivity;
 
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface IRegisterActivityService {

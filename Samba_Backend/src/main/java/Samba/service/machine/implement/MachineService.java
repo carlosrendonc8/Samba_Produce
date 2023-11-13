@@ -2,7 +2,7 @@ package Samba.service.machine.implement;
 
 import Samba.commons.constans.response.machine.IMachineResponse;
 import Samba.commons.converter.machine.MachineConverter;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.machine.MachineDTO;
 import Samba.commons.domains.entity.machine.IAdapterMachine;
 import Samba.commons.domains.entity.machine.MachineEntity;
@@ -29,7 +29,7 @@ public class MachineService implements IMachineService
     @Override
     public ResponseEntity<GenericResponseDTO> createVehicle(MachineDTO machineDTO) {
         try {
-            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.machineSambaId);
+            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
             if (!vehicleExist.isPresent()) {
                 MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                 this.vehicleRepository.save(machineEntity);
@@ -118,7 +118,7 @@ public class MachineService implements IMachineService
     @Override
     public ResponseEntity<GenericResponseDTO> updateVehicle(MachineDTO machineDTO) {
         try {
-            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.machineSambaId);
+            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
             if (vehicleExist.isPresent()) {
                 MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                 this.vehicleRepository.save(machineEntity);
@@ -148,7 +148,7 @@ public class MachineService implements IMachineService
     @Override
     public ResponseEntity<GenericResponseDTO> deleteVehicle(MachineDTO machineDTO) {
         try {
-            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.machineSambaId);
+            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
             if (vehicleExist.isPresent()) {
                 MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                 this.vehicleRepository.delete(machineEntity);

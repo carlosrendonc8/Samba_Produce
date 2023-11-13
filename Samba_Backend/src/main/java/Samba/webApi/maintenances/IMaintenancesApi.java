@@ -3,7 +3,7 @@ package Samba.webApi.maintenances;
 
 import Samba.commons.constans.endpoints.maintenance.IMaintenanceEndPoint;
 import Samba.commons.domains.DTO.maintenances.MaintenancesDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,7 +2,7 @@ package Samba.webApi.typeMachinery.implement;
 
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
 import Samba.service.typeMachinery.implement.TypeMachineryService;
 import Samba.webApi.typeMachinery.ITypeMachineryApi;

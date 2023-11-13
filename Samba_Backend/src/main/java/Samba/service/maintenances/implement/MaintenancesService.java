@@ -3,7 +3,7 @@ package Samba.service.maintenances.implement;
 import Samba.commons.constans.response.maintenance.IMaintenanceResponse;
 import Samba.commons.converter.maintenance.MaintenanceConverter;
 import Samba.commons.domains.DTO.maintenances.MaintenancesDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.entity.maintenances.MaintenancesEntity;
 import Samba.repository.maintenances.IMaintenancesRepository;
 import Samba.service.maintenances.IMaintenancesService;
