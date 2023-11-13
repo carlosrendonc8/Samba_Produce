@@ -1,6 +1,6 @@
 package Samba.service.machine;
 
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.machine.MachineDTO;
 import org.springframework.http.ResponseEntity;
 

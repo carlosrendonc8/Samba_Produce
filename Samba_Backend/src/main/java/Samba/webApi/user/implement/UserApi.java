@@ -4,7 +4,7 @@ package Samba.webApi.user.implement;
 import Samba.commons.constans.endpoints.user.IUserEndPoint;
 import Samba.commons.constans.response.user.IUserResponse;
 import Samba.commons.domains.DTO.user.UserDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.service.user.implement.UserService;
 import Samba.webApi.user.IUserApi;
 import io.swagger.v3.oas.annotations.Operation;

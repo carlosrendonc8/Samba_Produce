@@ -3,11 +3,10 @@ package Samba.service.registerActivity.implement;
 import Samba.commons.constans.response.registerActivity.IRegisterActivityResponse;
 import Samba.commons.converter.registerActivity.RegisterActivityConverter;
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
-import Samba.commons.domains.entity.accumulatedHours.AccumulatedHoursEntity;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.entity.machine.MachineEntity;
 import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
-import Samba.components.maintenances.MaintenancesComponents;
-import Samba.repository.accumulatedHours.IAccumulatedHoursRepository;
+import Samba.repository.machine.IMachineRepository;
 import Samba.repository.registerActivity.IRegisterActivityRepository;
 import Samba.service.registerActivity.IRegisterActivityService;
 import lombok.extern.log4j.Log4j2;
@@ -20,34 +19,34 @@ import java.util.Optional;
 @Service
 @Log4j2
 public class RegisterActivityService implements IRegisterActivityService {
+
+    private final IRegisterActivityRepository registerActivityRepository;
+    private final IMachineRepository machineRepository;
+    private final RegisterActivityConverter registerActivityConverter;
+
     @Autowired
-    private IRegisterActivityRepository registerActivityRepository;
-    @Autowired
-    private IAccumulatedHoursRepository accumulatedHoursRepository;
-    @Autowired
-    private MaintenancesComponents maintenancesComponents;
-    @Autowired
-    private RegisterActivityConverter registerActivityConverter;
+    public RegisterActivityService(IRegisterActivityRepository registerActivityRepository, IMachineRepository machineRepository, RegisterActivityConverter registerActivityConverter){
+        this.machineRepository = machineRepository;
+        this.registerActivityRepository = registerActivityRepository;
+        this.registerActivityConverter = registerActivityConverter;
+    }
     @Override
     public ResponseEntity<GenericResponseDTO> createRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
-            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.registerActivityId);
-            if (!registerExist.isPresent()) {
-                RegisterActivityEntity registerActivityEntity = registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
-                this.registerActivityRepository.save(registerActivityEntity);
-                AccumulatedHoursEntity accumulatedHoursEntity = new AccumulatedHoursEntity();
-                accumulatedHoursEntity.setAccumulatedHoursId(0);
-                accumulatedHoursEntity.setMachineEntity(registerActivityEntity.getMachineEntity());
-                accumulatedHoursEntity.setAccumulatedHoursHours(registerActivityEntity.getRegisterActivityHours());
-                this.accumulatedHoursRepository.save(accumulatedHoursEntity);
-                //maintenancesComponents.Example(registerActivityDTO);
+            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
+            Optional<MachineEntity> machineExist = this.machineRepository.findById(registerActivityDTO.getRegisterActivityMachineId());
+            if (!registerExist.isPresent() && machineExist.isPresent()) {
+                RegisterActivityEntity entity = this.registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
+                MachineEntity machineEntity = machineExist.get();
+                machineEntity.setMachineAccumulatedHours(machineEntity.getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
+                this.registerActivityRepository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_SUCCESS)
                         .objectResponse(IRegisterActivityResponse.CREATE_SUCCESS)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_FAIL)
                         .objectResponse(IRegisterActivityResponse.OPERATION_FAIL)
                         .statusCode(HttpStatus.OK.value())
@@ -67,7 +66,7 @@ public class RegisterActivityService implements IRegisterActivityService {
     @Override
     public ResponseEntity<GenericResponseDTO> readRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
-            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.registerActivityId);
+            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
             if (registerExist.isPresent()) {
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_SUCCESS)
@@ -124,7 +123,7 @@ public class RegisterActivityService implements IRegisterActivityService {
     @Override
     public ResponseEntity<GenericResponseDTO> updateRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
-            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.registerActivityId);
+            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
             if (registerExist.isPresent()) {
                 RegisterActivityEntity registerActivityEntity = registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 this.registerActivityRepository.save(registerActivityEntity);
@@ -154,7 +153,7 @@ public class RegisterActivityService implements IRegisterActivityService {
     @Override
     public ResponseEntity<GenericResponseDTO> deleteRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
-            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.registerActivityId);
+            Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
             if (registerExist.isPresent()) {
                 RegisterActivityEntity registerActivityEntity = registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 this.registerActivityRepository.delete(registerActivityEntity);

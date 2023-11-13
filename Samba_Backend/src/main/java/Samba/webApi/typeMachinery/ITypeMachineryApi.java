@@ -1,6 +1,6 @@
 package Samba.webApi.typeMachinery;
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

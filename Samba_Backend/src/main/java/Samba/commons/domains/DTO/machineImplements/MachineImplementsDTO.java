@@ -10,13 +10,6 @@ import java.io.Serializable;
 @ToString
 @Builder
 public class MachineImplementsDTO implements Serializable {
-    public Integer machineImplementId;
-    public String machineImplementName;
-
-    public Integer getMachineImplementId() {return machineImplementId;}
-    public void setMachineImplementId(Integer machineImplementId) {this.machineImplementId = machineImplementId;}
-
-
-    public String getMachineImplementName() {return machineImplementName;}
-    public void setMachineImplementName(String machineImplementName) {this.machineImplementName = machineImplementName;}
+    private Integer machineImplementId;
+    private String machineImplementName;
 }

@@ -1,7 +1,7 @@
 package Samba.service.maintenances;
 
 import Samba.commons.domains.DTO.maintenances.MaintenancesDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface IMaintenancesService {

@@ -1,5 +1,4 @@
 package Samba.commons.domains.entity.machine;
-import Samba.commons.domains.entity.accumulatedHours.AccumulatedHoursEntity;
 import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,27 +16,27 @@ public class MachineEntity
 {
     @Id
     @Column(name = "machine_id")
-    public Integer machineSambaId;
+    private Integer machineSambaId;
     @Column(name = "machine_name")
-    public String machineName;
+    private String machineName;
     @Column(name = "machine_plate")
-    public String machinePlate;
+    private String machinePlate;
     @Column(name = "machine_fuel")
-    public String machineFuel;
+    private String machineFuel;
     @Column(name = "machine_color")
-    public String machineColor;
+    private String machineColor;
     @Column(name = "machine_brand")
     public String machineBrand;
+    @Column(name = "machine_accumulated_hours", nullable = true)
+    private Integer machineAccumulatedHours;
     @ManyToOne()
     @JoinColumn(name = "type_machinary_id")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "typeMachinaryId")
     @JsonIgnore
     private TypeMachineryEntity typeMachineryEntity;
 
+    /*
     @OneToMany(mappedBy = "machineEntity")
     public List<RegisterActivityEntity> listRegisterActivity;
-
-    @OneToOne(mappedBy = "machineEntity", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private AccumulatedHoursEntity accumulatedHoursEntity;
+     */
 }
