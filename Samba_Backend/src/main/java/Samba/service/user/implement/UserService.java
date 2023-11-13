@@ -4,7 +4,7 @@ package Samba.service.user.implement;
 import Samba.commons.constans.response.user.IUserResponse;
 import Samba.commons.converter.user.UserConverter;
 import Samba.commons.domains.DTO.user.UserDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.entity.user.UserEntity;
 import Samba.repository.user.IUserRepository;
 import Samba.service.user.IUserService;

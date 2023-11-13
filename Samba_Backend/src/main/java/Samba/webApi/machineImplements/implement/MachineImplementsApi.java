@@ -1,10 +1,8 @@
 package Samba.webApi.machineImplements.implement;
 
-import Samba.commons.constans.endpoints.machine.IMachineEndPoint;
 import Samba.commons.constans.endpoints.machineImplements.IMachineImplementsEndPoint;
-import Samba.commons.constans.response.machine.IMachineResponse;
 import Samba.commons.constans.response.machineImplements.IMachineImplementsResponse;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.service.machineImplements.implement.MachineImplementsService;
 import Samba.webApi.machineImplements.IMachineImplementsApi;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

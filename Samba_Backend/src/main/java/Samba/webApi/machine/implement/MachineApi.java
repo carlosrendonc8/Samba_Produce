@@ -5,7 +5,7 @@ import Samba.commons.constans.response.machine.IMachineResponse;
 import Samba.commons.domains.DTO.machine.MachineDTO;
 import Samba.service.machine.implement.MachineService;
 import Samba.webApi.machine.IMachineApi;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

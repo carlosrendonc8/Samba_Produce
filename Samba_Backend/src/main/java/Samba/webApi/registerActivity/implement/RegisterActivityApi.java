@@ -3,7 +3,7 @@ package Samba.webApi.registerActivity.implement;
 import Samba.commons.constans.endpoints.registerActivity.IRegisterActivityEndPoint;
 import Samba.commons.constans.response.registerActivity.IRegisterActivityResponse;
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.service.registerActivity.implement.RegisterActivityService;
 import Samba.webApi.registerActivity.IRegisterActivityApi;
 import io.swagger.v3.oas.annotations.Operation;

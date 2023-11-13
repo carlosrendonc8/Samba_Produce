@@ -16,30 +16,27 @@ import java.time.LocalDate;
 public class RegisterActivityEntity {
     @Id
     @Column(name = "register_activity_id")
-    public int registerActivityId;
+    private int registerActivityId;
     @Column(name = "register_activity_date")
-    public LocalDate registerActivityDate;
+    private LocalDate registerActivityDate;
     @Column(name = "register_activity_hours")
-    public int registerActivityHours;
-    @Column(name = "register_activity_kilometers")
-    public int registerActivityKilometers;
-    @Column(name = "register_activity_accumulated_kilometers")
-    public int registerActivityAccumulatedKilometers;
-    @Column(name = "register_activity_accumulated_hours")
-    public int registerActivityAccumulatedHours;
+    private int registerActivityHours;
     @Column(name = "register_activity_work_realized")
-    public String registerActivityWorkRealized;
+    private String registerActivityWorkRealized;
     @Column(name = "register_activity_site_work")
-    public String registerActivitySiteWork;
+    private String registerActivitySiteWork;
     @Column(name = "register_activity_eventualities")
-    public String registerActivityEventualities;
+    private String registerActivityEventualities;
     @Column(name = "register_activity_implement_machine")
-    public String registerActivityImplementMachine;
-    @Column(name = "register_activity_gallons")
-    public int registerActivityGallons;
+    private String registerActivityImplementMachine;
+    @Column(name = "register_activity_machine_id")
+    private String registerActivityMachineId;
+
+    /*
     @ManyToOne()
     @JoinColumn(name = "machine_samba")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "machine_id")
     @JsonIgnore
     private MachineEntity machineEntity;
+     */
 }

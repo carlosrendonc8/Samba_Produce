@@ -13,20 +13,10 @@ import java.io.Serializable;
 @Builder
 public class MachineDTO implements Serializable
 {
-    public Integer machineSambaId;
-    public String machineName;
-    public String machinePlate;
-    public String machineFuel;
-    public String machineColor;
-    public Integer getMachineSambaId() {return machineSambaId;}
-    public void setMachineSambaId(Integer machineSambaId) {this.machineSambaId = machineSambaId;}
-    public String getMachineName() {return machineName;}
-    public void setMachineName(String machineName) {this.machineName = machineName;}
-    public String getMachinePlate() {return machinePlate;}
-    public void setMachinePlate(String machinePlate) {this.machinePlate = machinePlate;}
-    public String getMachineFuel() {return machineFuel;}
-    public void setMachineFuel(String machineFuel) {this.machineFuel = machineFuel;}
-    public String getMachineColor() {return machineColor;}
-    public void setMachineColor(String machineColor) {this.machineColor = machineColor;}
-
+    private Integer machineSambaId;
+    private String machineName;
+    private String machinePlate;
+    private String machineFuel;
+    private String machineColor;
+    private Integer machineAccumulatedHours;
 }

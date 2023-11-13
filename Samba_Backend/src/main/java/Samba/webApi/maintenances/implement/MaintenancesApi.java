@@ -3,7 +3,7 @@ package Samba.webApi.maintenances.implement;
 import Samba.commons.constans.endpoints.maintenance.IMaintenanceEndPoint;
 import Samba.commons.constans.response.maintenance.IMaintenanceResponse;
 import Samba.commons.domains.DTO.maintenances.MaintenancesDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.service.maintenances.implement.MaintenancesService;
 import Samba.webApi.maintenances.IMaintenancesApi;
 import io.swagger.v3.oas.annotations.Operation;

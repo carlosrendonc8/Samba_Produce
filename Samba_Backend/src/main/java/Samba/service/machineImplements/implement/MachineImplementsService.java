@@ -3,7 +3,7 @@ package Samba.service.machineImplements.implement;
 import Samba.commons.constans.response.machine.IMachineResponse;
 import Samba.commons.converter.machineImplements.MachineImplementsConverter;
 import Samba.commons.domains.DTO.machineImplements.MachineImplementsDTO;
-import Samba.commons.domains.DTO.responseDTO.GenericResponseDTO;
+import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.entity.machineImplements.MachineImplementsEntity;
 import Samba.repository.machineImplements.IMachineImplementsRepository;
 import Samba.service.machineImplements.IMachineImplementsService;
