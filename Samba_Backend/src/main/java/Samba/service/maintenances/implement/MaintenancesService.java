@@ -27,7 +27,7 @@ public class MaintenancesService implements IMaintenancesService {
     @Override
     public ResponseEntity<GenericResponseDTO> createMaintenance(MaintenancesDTO maintenancesDTO) {
         try {
-            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.maintenancesId);
+            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.getMaintenancesId());
             if (!maintenanceExist.isPresent()) {
                 MaintenancesEntity maintenancesEntity = maintenanceConverter.convertaintenanceDTOToaintenanceEntity(maintenancesDTO);
                 this.iMaintenancesRepository.save(maintenancesEntity);
@@ -116,7 +116,7 @@ public class MaintenancesService implements IMaintenancesService {
     @Override
     public ResponseEntity<GenericResponseDTO> updateMaintenance(MaintenancesDTO maintenancesDTO) {
         try {
-            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.maintenancesId);
+            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.getMaintenancesId());
             if (maintenanceExist.isPresent()) {
                 MaintenancesEntity maintenancesEntity = maintenanceConverter.convertaintenanceDTOToaintenanceEntity(maintenancesDTO);
                 this.iMaintenancesRepository.save(maintenancesEntity);
@@ -146,7 +146,7 @@ public class MaintenancesService implements IMaintenancesService {
     @Override
     public ResponseEntity<GenericResponseDTO> deleteMaintenance(MaintenancesDTO maintenancesDTO) {
         try {
-            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.maintenancesId);
+            Optional<MaintenancesEntity> maintenanceExist = this.iMaintenancesRepository.findById(maintenancesDTO.getMaintenancesId());
             if (maintenanceExist.isPresent()) {
                 MaintenancesEntity maintenancesEntity = maintenanceConverter.convertaintenanceDTOToaintenanceEntity(maintenancesDTO);
                 this.iMaintenancesRepository.delete(maintenancesEntity);

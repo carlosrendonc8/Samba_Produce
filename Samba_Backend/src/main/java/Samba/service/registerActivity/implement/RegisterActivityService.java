@@ -7,6 +7,7 @@ import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.entity.machine.MachineEntity;
 import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
+import Samba.components.MaintenanceLogic;
 import Samba.repository.machine.IMachineRepository;
 import Samba.repository.registerActivity.IRegisterActivityRepository;
 import Samba.service.registerActivity.IRegisterActivityService;
@@ -24,12 +25,15 @@ public class RegisterActivityService implements IRegisterActivityService {
     private final IRegisterActivityRepository registerActivityRepository;
     private final IMachineRepository machineRepository;
     private final RegisterActivityConverter registerActivityConverter;
+    private final MaintenanceLogic maintenanceLogic;
 
     @Autowired
-    public RegisterActivityService(IRegisterActivityRepository registerActivityRepository, IMachineRepository machineRepository, RegisterActivityConverter registerActivityConverter){
+    public RegisterActivityService(IRegisterActivityRepository registerActivityRepository, IMachineRepository machineRepository,
+                                   RegisterActivityConverter registerActivityConverter, MaintenanceLogic maintenanceLogic){
         this.machineRepository = machineRepository;
         this.registerActivityRepository = registerActivityRepository;
         this.registerActivityConverter = registerActivityConverter;
+        this.maintenanceLogic = maintenanceLogic;
     }
     @Override
     public ResponseEntity<GenericResponseDTO> createRegisterActivity(RegisterActivityDTO registerActivityDTO) {
@@ -40,6 +44,27 @@ public class RegisterActivityService implements IRegisterActivityService {
                 RegisterActivityEntity entity = this.registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 MachineEntity machineEntity = machineExist.get();
                 machineEntity.setMachineAccumulatedHours(machineEntity.getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
+
+
+                machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenance250(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenance500(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenance250(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineHydraulicOilChange(this.maintenanceLogic.hoursMaintenance1000(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineDifferentialOilChange(this.maintenanceLogic.hoursMaintenance1000(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineFrontAxleLubrication(this.maintenanceLogic.hoursMaintenance250(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachinePlanetaryGearOilChange(this.maintenanceLogic.hoursMaintenance500(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50(machineEntity.getMachineAccumulatedHours()));
+
+                machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50(machineEntity.getMachineAccumulatedHours()));
                 this.registerActivityRepository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_SUCCESS)
