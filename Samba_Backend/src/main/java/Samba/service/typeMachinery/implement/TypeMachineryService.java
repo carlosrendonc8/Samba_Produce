@@ -25,7 +25,7 @@ public class TypeMachineryService implements ITypeMachineryService
     @Override
     public ResponseEntity<GenericResponseDTO> createTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
         try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.typeMachinaryId);
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.getTypeMachinaryId());
             if (!typeMachineryExist.isPresent()) {
                 TypeMachineryEntity typeMachineryEntity = typeMachineryConverter.convertTypeMachineryDTOToTypeMachineryEntity(typeMachineryDTO);
                 this.typeMachineryRepository.save(typeMachineryEntity);
@@ -110,7 +110,7 @@ public class TypeMachineryService implements ITypeMachineryService
     @Override
     public ResponseEntity<GenericResponseDTO> updateTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
         try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.typeMachinaryId);
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.getTypeMachinaryId());
             if (typeMachineryExist.isPresent()) {
                 TypeMachineryEntity typeMachineryEntity = typeMachineryConverter.convertTypeMachineryDTOToTypeMachineryEntity(typeMachineryDTO);
                 this.typeMachineryRepository.save(typeMachineryEntity);
@@ -140,7 +140,7 @@ public class TypeMachineryService implements ITypeMachineryService
     @Override
     public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
         try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.typeMachinaryId);
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.getTypeMachinaryId());
             if (typeMachineryExist.isPresent()) {
                 TypeMachineryEntity typeMachineryEntity = typeMachineryConverter.convertTypeMachineryDTOToTypeMachineryEntity(typeMachineryDTO);
                 this.typeMachineryRepository.delete(typeMachineryEntity);
