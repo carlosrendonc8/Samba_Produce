@@ -25,7 +25,17 @@ CREATE TABLE machine_samba(
     machine_fuel VARCHAR(100) NOT NULL,
     machine_color VARCHAR(100) NOT NULL,
     machine_brand VARCHAR(100) NOT NULL,
-    machine_accumulated_hours INT,
+    machine_accumulated_hours INT NOT NULL,
+    machine_engine_oil_change VARCHAR(20),
+    machine_oil_filter_change VARCHAR(20),
+    machine_fuel_filter_change VARCHAR(20),
+    machine_hydraulic_oil_change VARCHAR(20),
+    machine_differential_oil_change VARCHAR(20),
+    machine_front_axle_lubrication VARCHAR(20),
+    machine_planetary_gear_oil_change VARCHAR(20),
+    machine_rocker_lubrication VARCHAR(20),
+    machine_flannel_lubrication VARCHAR(20),
+    machine_crosshead_lubrication VARCHAR(20),
     type_machinary_id INT,
     FOREIGN KEY (type_machinary_id) REFERENCES type_machine_samba(type_machinary_id)
 );
@@ -121,8 +131,8 @@ INSERT INTO type_machine_samba (type_machinary_name, type_machinary_message, typ
 
 
 -- Insertar 10 registros en machine_samba con type_machinary_id máximo de 3
-INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, type_machinary_id) VALUES
-('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 3),
+INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, machine_accumulated_hours, type_machinary_id) VALUES
+('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 30 , 3),
 ('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 3),
 ('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 3),
 ('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 3),
