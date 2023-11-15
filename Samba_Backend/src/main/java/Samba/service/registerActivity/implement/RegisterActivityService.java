@@ -1,6 +1,7 @@
 package Samba.service.registerActivity.implement;
 
 import Samba.commons.constans.response.registerActivity.IRegisterActivityResponse;
+import Samba.commons.constans.stateMaintenance.States;
 import Samba.commons.converter.registerActivity.RegisterActivityConverter;
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
