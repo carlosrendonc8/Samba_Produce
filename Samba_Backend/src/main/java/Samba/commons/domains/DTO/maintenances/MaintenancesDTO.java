@@ -10,7 +10,7 @@ import java.io.Serializable;
 @ToString
 @Builder
 public class MaintenancesDTO implements Serializable {
-    public Integer maintenancesId;
-    public String maintenancesName;
-    public int maintenanceHours;
+    private Integer maintenancesId;
+    private String maintenancesName;
+    private Integer maintenanceHours;
 }
