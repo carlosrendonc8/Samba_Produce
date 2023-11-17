@@ -1,3 +1,4 @@
+/*
 package Samba.commons.converter.typeMachinery;
 
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
@@ -29,3 +30,4 @@ public class TypeMachineryConverter
         return typeMachineryEntity;
     }
 }
+*/

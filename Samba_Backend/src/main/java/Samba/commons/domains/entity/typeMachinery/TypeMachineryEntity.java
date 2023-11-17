@@ -1,3 +1,4 @@
+/*
 package Samba.commons.domains.entity.typeMachinery;
 
 import jakarta.persistence.*;
@@ -26,3 +27,4 @@ public class TypeMachineryEntity
     @OneToMany(mappedBy = "typeMachineryEntity")
     private List<MachineEntity> listMachineEntity;
 }
+*/

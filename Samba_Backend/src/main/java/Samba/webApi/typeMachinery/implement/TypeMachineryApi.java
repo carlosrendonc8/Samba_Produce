@@ -1,3 +1,4 @@
+/*
 package Samba.webApi.typeMachinery.implement;
 
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
@@ -113,3 +114,4 @@ public class TypeMachineryApi implements ITypeMachineryApi
         return this.typeMachineryService.deleteTypeMachinery(typeMachineryDTO);
     }
 }
+*/

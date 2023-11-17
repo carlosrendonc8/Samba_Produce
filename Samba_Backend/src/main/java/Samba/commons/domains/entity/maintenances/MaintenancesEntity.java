@@ -12,11 +12,14 @@ import lombok.*;
 public class MaintenancesEntity {
     @Id
     @Column(name = "maintenances_id")
-    public Integer maintenancesId;
+    private Integer maintenancesId;
 
-    @Column(name = "maintenances_name")
-    public String maintenancesName;
+    @Column(name = "maintenance_type")
+    private String maintenanceType;
 
-    @Column(name = "maintenances_hours")
-    public int maintenanceHours;
+    @Column(name = "maintenance_date")
+    private String maintenanceDate;
+
+    @Column(name = "maintenance_machine_name")
+    private String maintenanceMachineName;
 }

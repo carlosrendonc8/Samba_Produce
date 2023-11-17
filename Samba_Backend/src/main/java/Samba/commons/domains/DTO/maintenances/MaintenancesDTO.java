@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Builder
 public class MaintenancesDTO implements Serializable {
     private Integer maintenancesId;
-    private String maintenancesName;
-    private Integer maintenanceHours;
+    private String maintenancesType;
+    private String maintenanceDate;
+    private Integer machineId;
 }
