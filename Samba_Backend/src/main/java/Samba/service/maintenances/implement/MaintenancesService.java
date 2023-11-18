@@ -72,6 +72,13 @@ public class MaintenancesService implements IMaintenancesService {
                     if (maintenancesDTO.getMaintenancesType().equalsIgnoreCase("Lubricacion de crucetas")){
                         machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.addMaintenance(machineEntity.getMachineCrossheadLubrication()));
                     }
+                    System.out.println("DTO id: " + maintenancesDTO.getMaintenancesId());
+                    System.out.println("entity id: " + entity.getMaintenancesId());
+                    System.out.println("DTO typo de mantenimiento: " + maintenancesDTO.getMaintenancesType());
+                    System.out.println("entity tipo de mantenimiento: " + entity.getMaintenancesType());
+                    System.out.println("DTO date: " + maintenancesDTO.getMaintenanceDate());
+                    System.out.println("entity date: " + entity.getMaintenanceDate());
+                    entity.setMaintenanceMachineName(machineEntity.getMachineName());
                     this.iMaintenancesRepository.save(entity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
                             .message(IMaintenanceResponse.OPERATION_SUCCESS)

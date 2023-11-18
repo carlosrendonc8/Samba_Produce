@@ -11,11 +11,12 @@ import lombok.*;
 @Table(name = "maintenances")
 public class MaintenancesEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maintenances_id")
     private Integer maintenancesId;
 
     @Column(name = "maintenance_type")
-    private String maintenanceType;
+    private String maintenancesType;
 
     @Column(name = "maintenance_date")
     private String maintenanceDate;

@@ -26,19 +26,19 @@ CREATE TABLE machine_samba(
     machine_plate VARCHAR(100) NOT NULL,
     machine_fuel VARCHAR(100) NOT NULL,
     machine_color VARCHAR(100) NOT NULL,
-    machine_brand VARCHAR(100) NOT NULL,
+    machine_brand VARCHAR(20) NOT NULL,
     machine_type VARCHAR(20) NOT NULL,
     machine_accumulated_hours INT NOT NULL,
-    machine_engine_oil_change VARCHAR(50),
-    machine_oil_filter_change VARCHAR(50),
-    machine_fuel_filter_change VARCHAR(50),
-    machine_hydraulic_oil_change VARCHAR(50),
-    machine_differential_oil_change VARCHAR(50),
-    machine_front_axle_lubrication VARCHAR(50),
-    machine_planetary_gear_oil_change VARCHAR(50),
-    machine_rocker_lubrication VARCHAR(50),
-    machine_flannel_lubrication VARCHAR(50),
-    machine_crosshead_lubrication VARCHAR(50)
+    machine_engine_oil_change VARCHAR(2) NOT NULL,
+    machine_oil_filter_change VARCHAR(2) NOT NULL,
+    machine_fuel_filter_change VARCHAR(2) NOT NULL,
+    machine_hydraulic_oil_change VARCHAR(2) NOT NULL,
+    machine_differential_oil_change VARCHAR(2) NOT NULL,
+    machine_front_axle_lubrication VARCHAR(2) NOT NULL,
+    machine_planetary_gear_oil_change VARCHAR(2) NOT NULL,
+    machine_rocker_lubrication VARCHAR(2) NOT NULL,
+    machine_flannel_lubrication VARCHAR(2) NOT NULL,
+    machine_crosshead_lubrication VARCHAR(2) NOT NULL
     -- type_machinary_id INT,
     -- FOREIGN KEY (type_machinary_id) REFERENCES type_machine_samba(type_machinary_id)
 );
@@ -67,6 +67,18 @@ CREATE TABLE maintenances(
 	maintenance_date VARCHAR(10) NOT NULL,
 	maintenance_machine_name VARCHAR(20) NOT NULL
 );
+
+CREATE TABLE type_machinary(
+	type_machinary_id INT AUTO_INCREMENT PRIMARY KEY,
+    type_machinary_name VARCHAR(20) NOT NULL
+);
+
+INSERT INTO type_machinary(type_machinary_name) VALUES
+('volqueta'),
+('cosechadora'),
+('tractor'),
+('sembrador'),
+('vehiculo');
 
 /*
 INSERT INTO maintenances(maintenances_name, maintenances_hours) VALUES
@@ -134,23 +146,25 @@ INSERT INTO machine_implements(machine_implement_name) VALUES
 -- - vehiculo
 
 -- Insertar 10 registros en machine_samba con type_machinary_id máximo de 3
-INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, machine_type, machine_accumulated_hours, machine_engine_oil_change) VALUES
-('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu','tractor' , 30 , '00'),
-('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 'tractor', 30 , '00'),
-('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 'tractor', 30 , '00'),
-('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 'tractor', 30, '00' ),
-('TRACTOR VALTRA N 2', 'GHI012', 'Diésel', 'Naranja', 'Caterpillar', 'tractor',30 , '00'),
-('TRACTOR VALTRA N 4', 'JKL345', 'Diésel', 'Gris', 'New Holland', 'tractor',30 , '00'),
-('TRACTOR CLERY RD 254A', 'PQR678', 'Gasolina', 'Rojo', 'Massey Ferguson', 'tractor',30 , '00'),
-('TRACTOR CASE F 35 N 1', 'VWX234', 'Diésel', 'Blanco', 'John Deere', 'tractor',30, '00' ),
-('TRACTOR CASE FARMALL 55', 'YZA567', 'Gasolina', 'Verde', 'Kubota', 'tractor',30, '00'),
-('TRACTOR CASE F 35 N 2', 'UVW789', 'Diésel', 'Rojo', 'John Deere','tractor',30 , '00'),
-('NISSAN', 'MWM-143', 'Diésel', 'Gris', 'NISSAN','tractor',30 , '00'),
-('CAMION JAC', 'GHI678', 'Diésel', 'Gris', 'JAC','tractor',30 , '00'),
-('RETROEXCAVADORA JCB', 'GHI678', 'Diésel', 'Gris', 'JCB','tractor',30 , '00'),
-('COMBINADA JD 1175  # 1', 'VWX567', 'Diésel', 'Verde', 'John Deere','tractor',30 , '00'),
-('COMBINADA JD 1175  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota','tractor',30 , '00'),
-('SEMBRADORA  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 'tractor',30 , '00');
+INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, machine_type, machine_accumulated_hours,
+machine_engine_oil_change, machine_oil_filter_change, machine_fuel_filter_change, machine_hydraulic_oil_change,  machine_differential_oil_change,
+machine_front_axle_lubrication, machine_planetary_gear_oil_change, machine_rocker_lubrication, machine_flannel_lubrication, machine_crosshead_lubrication) VALUES
+('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 'tractor' , 30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 'tractor', 30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 'tractor', 30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 'tractor', 30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR VALTRA N 2', 'GHI012', 'Diésel', 'Naranja', 'Caterpillar', 'tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR VALTRA N 4', 'JKL345', 'Diésel', 'Gris', 'New Holland', 'tractor',30 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
+('TRACTOR CLERY RD 254A', 'PQR678', 'Gasolina', 'Rojo', 'Massey Ferguson', 'tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('TRACTOR CASE F 35 N 1', 'VWX234', 'Diésel', 'Blanco', 'John Deere', 'tractor',30 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
+('TRACTOR CASE FARMALL 55', 'YZA567', 'Gasolina', 'Verde', 'Kubota', 'tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
+('TRACTOR CASE F 35 N 2', 'UVW789', 'Diésel', 'Rojo', 'John Deere','tractor',30 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
+('NISSAN', 'MWM-143', 'Diésel', 'Gris', 'NISSAN','tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('CAMION JAC', 'GHI678', 'Diésel', 'Gris', 'JAC','tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('RETROEXCAVADORA JCB', 'GHI678', 'Diésel', 'Gris', 'JCB','tractor',30, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('COMBINADA JD 1175  # 1', 'VWX567', 'Diésel', 'Verde', 'John Deere','tractor',20, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
+('COMBINADA JD 1175  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota','tractor',20 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
+('SEMBRADORA  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 'tractor',20 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00');
 
 /*
 SELECT p.machine_id AS idMachine, p.machine_name AS nameMachine, p.machine_color AS colorMachine, p.machine_brand AS brandMachine

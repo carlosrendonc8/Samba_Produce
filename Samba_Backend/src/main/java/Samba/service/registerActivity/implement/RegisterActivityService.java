@@ -53,6 +53,8 @@ public class RegisterActivityService implements IRegisterActivityService {
                 machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineRockerLubrication()));
                 machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineFlannelLubrication()));
                 machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineCrossheadLubrication()));
+                System.out.println("DTO: " + registerActivityDTO);
+                System.out.println("entity: " + entity);
                 this.registerActivityRepository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IRegisterActivityResponse.OPERATION_SUCCESS)
