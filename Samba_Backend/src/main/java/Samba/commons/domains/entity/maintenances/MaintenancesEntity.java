@@ -15,12 +15,12 @@ public class MaintenancesEntity {
     @Column(name = "maintenances_id")
     private Integer maintenancesId;
 
-    @Column(name = "maintenance_type")
+    @Column(name = "maintenances_type")
     private String maintenancesType;
 
-    @Column(name = "maintenance_date")
+    @Column(name = "maintenances_date")
     private String maintenanceDate;
 
-    @Column(name = "maintenance_machine_name")
+    @Column(name = "maintenances_machine_name")
     private String maintenanceMachineName;
 }

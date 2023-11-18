@@ -43,6 +43,8 @@ public class MachineService implements IMachineService
                 if (typeMachineExist.isPresent()) {
                     MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                     machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
+                    //machineEntity.setMachineEngineOilChange("00");
+                    //machineEntity.setMachineOilFilterChange("00");
                     this.vehicleRepository.save(machineEntity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
                             .message(IMachineResponse.OPERATION_SUCCESS)
