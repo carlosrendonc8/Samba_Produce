@@ -1,3 +1,4 @@
+/*
 package Samba.service.typeMachinery.implement;
 
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
@@ -167,3 +168,4 @@ public class TypeMachineryService implements ITypeMachineryService
         }
     }
 }
+*/

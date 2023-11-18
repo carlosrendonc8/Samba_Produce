@@ -1,10 +1,6 @@
 package Samba.commons.domains.entity.machine;
-import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import com.fasterxml.jackson.annotation.*;
-import Samba.commons.domains.entity.typeMachinery.TypeMachineryEntity;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +28,9 @@ public class MachineEntity
 
     @Column(name = "machine_brand")
     private String machineBrand;
+
+    @Column(name = "machine_type")
+    private String machineType;
 
     @Column(name = "machine_accumulated_hours")
     private Integer machineAccumulatedHours;
@@ -66,14 +65,14 @@ public class MachineEntity
     @Column(name = "machine_crosshead_lubrication", nullable = true)
     private String machineCrossheadLubrication;
 
+    /*
     @ManyToOne()
     @JoinColumn(name = "type_machinary_id")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "typeMachinaryId")
     @JsonIgnore
     private TypeMachineryEntity typeMachineryEntity;
 
-    /*
     @OneToMany(mappedBy = "machineEntity")
     public List<RegisterActivityEntity> listRegisterActivity;
-     */
+    */
 }

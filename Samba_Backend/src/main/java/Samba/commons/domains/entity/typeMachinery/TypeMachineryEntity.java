@@ -2,8 +2,6 @@ package Samba.commons.domains.entity.typeMachinery;
 
 import jakarta.persistence.*;
 import lombok.*;
-import Samba.commons.domains.entity.machine.MachineEntity;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,10 +17,8 @@ public class TypeMachineryEntity
     public Integer typeMachinaryId;
     @Column(name = "type_machinary_name")
     public String typeMachinaryName;
-    @Column (name = "type_machinary_message")
-    public String typeMachinaryMessage;
-    @Column( name = "type_machinary_status")
-    public String typeMachinaryStatus;
+    /*
     @OneToMany(mappedBy = "typeMachineryEntity")
     private List<MachineEntity> listMachineEntity;
+    */
 }

@@ -2,11 +2,13 @@ package Samba.service.machine.implement;
 
 import Samba.commons.constans.response.machine.IMachineResponse;
 import Samba.commons.converter.machine.MachineConverter;
+import Samba.commons.domains.entity.typeMachinery.TypeMachineryEntity;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.machine.MachineDTO;
 import Samba.commons.domains.entity.machine.IAdapterMachine;
 import Samba.commons.domains.entity.machine.MachineEntity;
 import Samba.repository.machine.IMachineRepository;
+import Samba.repository.typeMachinery.ITypeMachineryRepository;
 import Samba.service.machine.IMachineService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +24,43 @@ import java.util.Optional;
 @Service
 public class MachineService implements IMachineService
 {
-    @Autowired
-    public IMachineRepository vehicleRepository;
-    @Autowired
-    public MachineConverter machineConverter;
+    private final IMachineRepository vehicleRepository;
+    private final MachineConverter machineConverter;
+    private final ITypeMachineryRepository typeMachineryRepository;
+
+    public MachineService(IMachineRepository vehicleRepository, MachineConverter machineConverter, ITypeMachineryRepository typeMachineryRepository){
+        this.machineConverter = machineConverter;
+        this.typeMachineryRepository = typeMachineryRepository;
+        this.vehicleRepository = vehicleRepository;
+    }
+
     @Override
     public ResponseEntity<GenericResponseDTO> createVehicle(MachineDTO machineDTO) {
         try {
             Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
-            if (!vehicleExist.isPresent()) {
-                MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
-                this.vehicleRepository.save(machineEntity);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_SUCCESS)
-                        .objectResponse(IMachineResponse.CREATE_SUCCESS)
-                        .statusCode(HttpStatus.OK.value())
-                        .build());
+            Optional<TypeMachineryEntity> typeMachineExist = this.typeMachineryRepository.findById(machineDTO.getTypeMachineId());
+            if (vehicleExist.isEmpty()) {
+                if (typeMachineExist.isPresent()) {
+                    MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
+                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
+                    //machineEntity.setMachineEngineOilChange("00");
+                    //machineEntity.setMachineOilFilterChange("00");
+                    this.vehicleRepository.save(machineEntity);
+                    return ResponseEntity.ok(GenericResponseDTO.builder()
+                            .message(IMachineResponse.OPERATION_SUCCESS)
+                            .objectResponse(IMachineResponse.CREATE_SUCCESS)
+                            .statusCode(HttpStatus.OK.value())
+                            .build());
+                } else {
+                    return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                            .message(IMachineResponse.OPERATION_FAIL+ " El tipo de maquina pasado como id no existe")
+                            .objectResponse(IMachineResponse.OPERATION_FAIL)
+                            .statusCode(HttpStatus.OK.value())
+                            .build());
+                }
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_FAIL)
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(IMachineResponse.OPERATION_FAIL + " El id de la maquina ya existe")
                         .objectResponse(IMachineResponse.OPERATION_FAIL)
                         .statusCode(HttpStatus.OK.value())
                         .build());
