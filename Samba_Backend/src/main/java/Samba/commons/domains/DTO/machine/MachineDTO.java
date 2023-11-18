@@ -18,5 +18,7 @@ public class MachineDTO implements Serializable
     private String machinePlate;
     private String machineFuel;
     private String machineColor;
+    private String machineBrand;
+    private Integer typeMachineId;
     private Integer machineAccumulatedHours;
 }
