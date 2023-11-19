@@ -76,8 +76,8 @@ public class TypeMachineryApi implements ITypeMachineryApi
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachineId) {
-        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachineId);
+    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachinaryId) {
+        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachinaryId);
     }
     @Override
     @Operation(summary = "actualiza la maquinaria")

@@ -115,7 +115,9 @@ public class MaintenancesApi implements IMaintenancesApi {
         return this.maintenancesService.deleteMaintenance(maintenancesDTO);
     }
 
+    @Override
+    @GetMapping(IMaintenanceEndPoint.THERE_IS_MAINTENANCE)
     public ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(@PathVariable Integer typeMachineId){
-        return this.thereAreMaintenancesForTypeMachine(typeMachineId);
+        return this.maintenancesService.thereAreMaintenancesForTypeMachine(typeMachineId);
     }
 }

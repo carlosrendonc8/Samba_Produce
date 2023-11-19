@@ -77,6 +77,7 @@ public class MaintenancesService implements IMaintenancesService {
                     if (maintenancesDTO.getMaintenancesType().equalsIgnoreCase("Lubricacion de crucetas")){
                         machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.addMaintenance(machineEntity.getMachineCrossheadLubrication()));
                     }
+                    entity.setMaintenanceMachineName(machineEntity.getMachineName());
                     this.iMaintenancesRepository.save(entity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
                             .message(IMaintenanceResponse.OPERATION_SUCCESS)
@@ -232,6 +233,7 @@ public class MaintenancesService implements IMaintenancesService {
     public ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(Integer typeMachineId) {
         try {
             Optional<TypeMachineryEntity> typeMachineExist = this.typeMachineryRepository.findById(typeMachineId);
+            List<TypeMachineryEntity> typeMachineryEntityList = this.typeMachineryRepository.findAll();
             if (typeMachineExist.isPresent()) {
                 List<MachineEntity> machineEntityList = this.machineRepository.findAll();
                 if (machineEntityList.isEmpty()) {
@@ -277,7 +279,7 @@ public class MaintenancesService implements IMaintenancesService {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMaintenanceResponse.OPERATION_FAIL)
                         .objectResponse(IMaintenanceResponse.OPERATION_FAIL + ", El tipo de maquina pasado como id no existe")
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {

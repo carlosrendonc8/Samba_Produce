@@ -92,10 +92,13 @@ public class TypeMachineryService implements ITypeMachineryService
         }
     }
     @Override
-    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachineId) {
+    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachinaryId) {
+        System.out.println(typeMachinaryId);
         try {
-            Optional<TypeMachineryEntity> typeMachineryEntityExist = this.typeMachineryRepository.findById(typeMachineId);
+            Optional<TypeMachineryEntity> typeMachineryEntityExist = this.typeMachineryRepository.findById(typeMachinaryId);
             List<MachineEntity> machineEntityExist = this.machineRepository.findAll();
+            System.out.println(typeMachineryEntityExist);
+            System.out.println(machineEntityExist);
             if (typeMachineryEntityExist.isPresent() && !machineEntityExist.isEmpty()) {
                 List<MachineEntity> machineWithMaintenanceList = new ArrayList<>();
                 for(MachineEntity machineEntity : machineEntityExist){

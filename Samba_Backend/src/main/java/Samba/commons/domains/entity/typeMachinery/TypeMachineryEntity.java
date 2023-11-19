@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "type_machine_samba")
+@Table(name = "type_machinary")
 public class TypeMachineryEntity
 {
     @Id
