@@ -14,10 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(IMaintenanceEndPoint.BASE_URL_MAINTENANCE)
@@ -116,5 +113,9 @@ public class MaintenancesApi implements IMaintenancesApi {
     @GetMapping(IMaintenanceEndPoint.DELETE_MAINTENANCE)
     public ResponseEntity<GenericResponseDTO> deleteMaintenance(MaintenancesDTO maintenancesDTO) {
         return this.maintenancesService.deleteMaintenance(maintenancesDTO);
+    }
+
+    public ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(@PathVariable Integer typeMachineId){
+        return this.thereAreMaintenancesForTypeMachine(typeMachineId);
     }
 }

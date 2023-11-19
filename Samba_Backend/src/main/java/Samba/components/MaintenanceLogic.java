@@ -73,4 +73,13 @@ public class MaintenanceLogic {
             return "ya tiene mantenimiento";
         }
     }
+
+    public boolean doesItHaveMaintenance(String stateCode){
+        if(stateCode.charAt(1) == '0'){
+            if(stateCode.charAt(0) == '1' || stateCode.charAt(0) == '2'){
+                return true;
+            }
+        }
+        return false;
+    }
 }

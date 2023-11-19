@@ -1,28 +1,38 @@
-/*
 package Samba.service.typeMachinery.implement;
 
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
 import Samba.commons.converter.typeMachinery.TypeMachineryConverter;
+import Samba.commons.domains.entity.machine.MachineEntity;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
 import Samba.commons.domains.entity.typeMachinery.TypeMachineryEntity;
+import Samba.components.MaintenanceLogic;
+import Samba.repository.machine.IMachineRepository;
 import Samba.repository.typeMachinery.ITypeMachineryRepository;
 import Samba.service.typeMachinery.ITypeMachineryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Log4j2
 @Service
 public class TypeMachineryService implements ITypeMachineryService
 {
-    @Autowired
-    public ITypeMachineryRepository typeMachineryRepository;
-    @Autowired
-    public TypeMachineryConverter typeMachineryConverter;
+    private final ITypeMachineryRepository typeMachineryRepository;
+    private final TypeMachineryConverter typeMachineryConverter;
+    private final IMachineRepository machineRepository;
+    private final MaintenanceLogic maintenanceLogic;
+    public TypeMachineryService(ITypeMachineryRepository typeMachineryRepository, TypeMachineryConverter typeMachineryConverter,
+                                IMachineRepository machineRepository, MaintenanceLogic maintenanceLogic){
+        this.typeMachineryConverter = typeMachineryConverter;
+        this.typeMachineryRepository = typeMachineryRepository;
+        this.machineRepository = machineRepository;
+        this.maintenanceLogic = maintenanceLogic;
+    }
     @Override
     public ResponseEntity<GenericResponseDTO> createTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
         try {
@@ -82,17 +92,44 @@ public class TypeMachineryService implements ITypeMachineryService
         }
     }
     @Override
-    public ResponseEntity<GenericResponseDTO> readAllMachinery() {
+    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachineId) {
         try {
-            List<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findAll();
-            if (!typeMachineryExist.isEmpty()) {
+            Optional<TypeMachineryEntity> typeMachineryEntityExist = this.typeMachineryRepository.findById(typeMachineId);
+            List<MachineEntity> machineEntityExist = this.machineRepository.findAll();
+            if (typeMachineryEntityExist.isPresent() && !machineEntityExist.isEmpty()) {
+                List<MachineEntity> machineWithMaintenanceList = new ArrayList<>();
+                for(MachineEntity machineEntity : machineEntityExist){
+                    if(machineEntity.getMachineType().equals(typeMachineryEntityExist.get().getTypeMachinaryName())){
+                        if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineEngineOilChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineOilFilterChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFuelFilterChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineHydraulicOilChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineDifferentialOilChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFrontAxleLubrication())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachinePlanetaryGearOilChange())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineRockerLubrication())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFlannelLubrication())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineCrossheadLubrication())){
+                            machineWithMaintenanceList.add(machineEntity);
+                        }
+                    }
+                }
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_SUCCESS)
-                        .objectResponse(typeMachineryExist)
+                        .objectResponse(machineWithMaintenanceList)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.OPERATION_FAIL)
                         .statusCode(HttpStatus.OK.value())
@@ -168,4 +205,3 @@ public class TypeMachineryService implements ITypeMachineryService
         }
     }
 }
-*/
