@@ -179,11 +179,19 @@ public class TypeMachineryService implements ITypeMachineryService
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
+    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachinaryId) {
         try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.getTypeMachinaryId());
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachinaryId);
+            List<MachineEntity> machineEntityList = this.machineRepository.findAll();
             if (typeMachineryExist.isPresent()) {
-                TypeMachineryEntity typeMachineryEntity = typeMachineryConverter.convertTypeMachineryDTOToTypeMachineryEntity(typeMachineryDTO);
+                TypeMachineryEntity typeMachineryEntity = typeMachineryExist.get();
+                if(!machineEntityList.isEmpty()){
+                    for(MachineEntity machineEntity : machineEntityList){
+                        if(machineEntity.getMachineType().equals(typeMachineryEntity.getTypeMachinaryName())){
+                            this.machineRepository.delete(machineEntity);
+                        }
+                    }
+                }
                 this.typeMachineryRepository.delete(typeMachineryEntity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_SUCCESS)

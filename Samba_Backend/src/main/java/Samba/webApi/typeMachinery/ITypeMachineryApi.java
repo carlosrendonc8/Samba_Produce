@@ -15,5 +15,5 @@ public interface ITypeMachineryApi
     @PutMapping(ITypeMachineEndPoint.UPDATE_TYPE_MACHINERY)
     ResponseEntity<GenericResponseDTO> updateTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO);
     @DeleteMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)
-    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO);
+    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachinaryId);
 }

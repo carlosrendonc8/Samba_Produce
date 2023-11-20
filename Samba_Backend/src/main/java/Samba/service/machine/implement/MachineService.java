@@ -93,8 +93,6 @@ public class MachineService implements IMachineService
         try {
             List<IAdapterMachine> vehicleExist = this.vehicleRepository.listMachinery(machineId);
             if (!vehicleExist.isEmpty()) {
-                System.out.println("Entramos al Metodo");
-                System.out.println("Vehiculo existe" + vehicleExist.get(0).getBrandMachine());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_SUCCESS)
                         .objectResponse(vehicleExist)
