@@ -12,7 +12,6 @@ import Samba.repository.machine.IMachineRepository;
 import Samba.repository.typeMachinery.ITypeMachineryRepository;
 import Samba.service.machine.IMachineService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -99,10 +98,10 @@ public class MachineService implements IMachineService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -118,14 +117,11 @@ public class MachineService implements IMachineService
     @Override
     public ResponseEntity<GenericResponseDTO> readAllVehicle() {
         try {
-            List<MachineDTO> listDTO = new ArrayList<>();
             List<MachineEntity> vehicleExist = this.vehicleRepository.findAll();
             if (!vehicleExist.isEmpty()) {
-                System.out.println("Entramos al Metodo leer");
-                vehicleExist.forEach(item -> listDTO.add(machineConverter.convertMachineEntityToMachineDTO(item)));
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_SUCCESS)
-                        .objectResponse(listDTO)
+                        .objectResponse(vehicleExist)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
@@ -153,8 +149,20 @@ public class MachineService implements IMachineService
             Optional<TypeMachineryEntity> typeMachineExist = this.typeMachineryRepository.findById(machineDTO.getTypeMachineId());
             if (vehicleExist.isPresent()) {
                 if(typeMachineExist.isPresent()) {
-                    MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
+                    MachineEntity machineEntity = this.machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                     TypeMachineryEntity typeMachine = typeMachineExist.get();
+                    Integer accumulatedHours = machineEntity.getMachineAccumulatedHours();
+                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
+                    machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
+                    machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachineHydraulicOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 1000));
+                    machineEntity.setMachineDifferentialOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 1000));
+                    machineEntity.setMachineFrontAxleLubrication(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachinePlanetaryGearOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
+                    machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
+                    machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
+                    machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
                     machineEntity.setMachineType(typeMachine.getTypeMachinaryName());
                     this.vehicleRepository.save(machineEntity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
@@ -166,14 +174,14 @@ public class MachineService implements IMachineService
                     return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                             .message(IMachineResponse.OPERATION_FAIL + ", el tipo de maquina ingresado no existe")
                             .objectResponse(IMachineResponse.UPDATE_FAIL)
-                            .statusCode(HttpStatus.OK.value())
+                            .statusCode(HttpStatus.BAD_REQUEST.value())
                             .build());
                 }
             } else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.UPDATE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -188,22 +196,21 @@ public class MachineService implements IMachineService
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteVehicle(MachineDTO machineDTO) {
+    public ResponseEntity<GenericResponseDTO> deleteVehicle(Integer machineId) {
         try {
-            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
+            Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineId);
             if (vehicleExist.isPresent()) {
-                MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
-                this.vehicleRepository.delete(machineEntity);
+                this.vehicleRepository.delete(vehicleExist.get());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_SUCCESS)
                         .objectResponse(IMachineResponse.DELETE_SUCCESS)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.DELETE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -222,17 +229,16 @@ public class MachineService implements IMachineService
         try {
             Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineId);
             if (vehicleExist.isPresent()) {
-                System.out.println("Entramos al Metodo");
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_SUCCESS)
                         .objectResponse(vehicleExist)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
-                        .objectResponse(IMachineResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .objectResponse(IMachineResponse.NOT_FOUND)
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {

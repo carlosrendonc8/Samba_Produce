@@ -1,4 +1,4 @@
-package Samba.webApi.registerActivity.implement;
+package Samba.webApi.implementsGlobal;
 
 import Samba.commons.constans.endpoints.registerActivity.IRegisterActivityEndPoint;
 import Samba.commons.constans.response.registerActivity.IRegisterActivityResponse;
@@ -59,8 +59,8 @@ public class RegisterActivityApi implements IRegisterActivityApi {
             @ApiResponse(responseCode = "500", description = IRegisterActivityResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IRegisterActivityEndPoint.READ_REGISTER_ACTIVITY)
-    public ResponseEntity<GenericResponseDTO> readRegisterActivity(@RequestBody RegisterActivityDTO registerActivityDTO) {
-        return this.registerActivityService.readRegisterActivity(registerActivityDTO);
+    public ResponseEntity<GenericResponseDTO> readRegisterActivity(@PathVariable Integer registerActivityId) {
+        return this.registerActivityService.readRegisterActivity(registerActivityId);
     }
 
     @Override

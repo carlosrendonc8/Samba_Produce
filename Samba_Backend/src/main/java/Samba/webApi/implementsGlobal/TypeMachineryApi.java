@@ -1,5 +1,5 @@
 
-package Samba.webApi.typeMachinery.implement;
+package Samba.webApi.implementsGlobal;
 
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;

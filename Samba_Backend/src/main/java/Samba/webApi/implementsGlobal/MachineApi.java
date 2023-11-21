@@ -1,4 +1,4 @@
-package Samba.webApi.machine.implement;
+package Samba.webApi.implementsGlobal;
 
 import Samba.commons.constans.endpoints.machine.IMachineEndPoint;
 import Samba.commons.constans.response.machine.IMachineResponse;
@@ -81,6 +81,7 @@ public class MachineApi implements IMachineApi
     public ResponseEntity<GenericResponseDTO> readAllMachine() {
         return this.machineService.readAllVehicle();
     }
+
     @Override
     @Operation(summary = "actualiza los vehiculos")
     @ApiResponses(value = {
@@ -112,8 +113,8 @@ public class MachineApi implements IMachineApi
             @ApiResponse(responseCode = "500", description = IMachineResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @DeleteMapping(IMachineEndPoint.DELETE_MACHINE)
-    public ResponseEntity<GenericResponseDTO> deleteTypeMachine(@RequestBody MachineDTO machineDTO) {
-        return this.machineService.deleteVehicle(machineDTO);
+    public ResponseEntity<GenericResponseDTO> deleteTypeMachine(@PathVariable Integer machineId) {
+        return this.machineService.deleteVehicle(machineId);
     }
 
     @Override

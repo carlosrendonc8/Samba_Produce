@@ -10,6 +10,6 @@ public interface IMachineService
     ResponseEntity<GenericResponseDTO> readVehicle(Integer machineId);
     ResponseEntity<GenericResponseDTO> readAllVehicle();
     ResponseEntity<GenericResponseDTO> updateVehicle(MachineDTO machineDTO);
-    ResponseEntity<GenericResponseDTO> deleteVehicle(MachineDTO machineDTO);
+    ResponseEntity<GenericResponseDTO> deleteVehicle(Integer machineId);
     ResponseEntity<GenericResponseDTO> readVehicleId(Integer machineId);
 }

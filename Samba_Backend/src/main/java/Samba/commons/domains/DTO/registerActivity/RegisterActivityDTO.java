@@ -18,6 +18,6 @@ public class RegisterActivityDTO implements Serializable {
     private String registerActivityWorkRealized;
     private String registerActivitySiteWork;
     private String registerActivityEventualities;
-    private String registerActivityImplementMachine;
+    private Integer registerActivityImplementMachine;
     private Integer registerActivityMachineId;
 }
