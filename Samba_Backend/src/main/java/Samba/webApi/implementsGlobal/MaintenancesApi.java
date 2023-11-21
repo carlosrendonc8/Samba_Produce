@@ -1,4 +1,4 @@
-package Samba.webApi.maintenances.implement;
+package Samba.webApi.implementsGlobal;
 
 import Samba.commons.constans.endpoints.maintenance.IMaintenanceEndPoint;
 import Samba.commons.constans.response.maintenance.IMaintenanceResponse;

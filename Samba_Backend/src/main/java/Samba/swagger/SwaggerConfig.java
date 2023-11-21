@@ -17,10 +17,10 @@ public class SwaggerConfig implements WebMvcConfigurer {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.companyname.app"))
-                .paths(PathSelectors.regex("/.*"))
-                .build()
-                .apiInfo(apiInfoMetaData());
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+                //.apiInfo(apiInfoMetaData());
     }
 
     private ApiInfo apiInfoMetaData(){
