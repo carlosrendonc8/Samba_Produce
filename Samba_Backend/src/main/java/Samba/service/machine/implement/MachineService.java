@@ -7,6 +7,7 @@ import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.machine.MachineDTO;
 import Samba.commons.domains.entity.machine.IAdapterMachine;
 import Samba.commons.domains.entity.machine.MachineEntity;
+import Samba.components.MaintenanceLogic;
 import Samba.repository.machine.IMachineRepository;
 import Samba.repository.typeMachinery.ITypeMachineryRepository;
 import Samba.service.machine.IMachineService;
@@ -28,10 +29,13 @@ public class MachineService implements IMachineService
     private final MachineConverter machineConverter;
     private final ITypeMachineryRepository typeMachineryRepository;
 
-    public MachineService(IMachineRepository vehicleRepository, MachineConverter machineConverter, ITypeMachineryRepository typeMachineryRepository){
+    private final MaintenanceLogic maintenanceLogic;
+
+    public MachineService(IMachineRepository vehicleRepository, MachineConverter machineConverter, ITypeMachineryRepository typeMachineryRepository, MaintenanceLogic maintenanceLogic){
         this.machineConverter = machineConverter;
         this.typeMachineryRepository = typeMachineryRepository;
         this.vehicleRepository = vehicleRepository;
+        this.maintenanceLogic = maintenanceLogic;
     }
 
     @Override
@@ -42,9 +46,18 @@ public class MachineService implements IMachineService
             if (vehicleExist.isEmpty()) {
                 if (typeMachineExist.isPresent()) {
                     MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
+                    Integer accumulatedHours = machineEntity.getMachineAccumulatedHours();
                     machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
-                    //machineEntity.setMachineEngineOilChange("00");
-                    //machineEntity.setMachineOilFilterChange("00");
+                    machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
+                    machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachineHydraulicOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 1000));
+                    machineEntity.setMachineDifferentialOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 1000));
+                    machineEntity.setMachineFrontAxleLubrication(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
+                    machineEntity.setMachinePlanetaryGearOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
+                    machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
+                    machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
+                    machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
                     this.vehicleRepository.save(machineEntity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
                             .message(IMachineResponse.OPERATION_SUCCESS)
@@ -80,8 +93,6 @@ public class MachineService implements IMachineService
         try {
             List<IAdapterMachine> vehicleExist = this.vehicleRepository.listMachinery(machineId);
             if (!vehicleExist.isEmpty()) {
-                System.out.println("Entramos al Metodo");
-                System.out.println("Vehiculo existe" + vehicleExist.get(0).getBrandMachine());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_SUCCESS)
                         .objectResponse(vehicleExist)
@@ -139,16 +150,27 @@ public class MachineService implements IMachineService
     public ResponseEntity<GenericResponseDTO> updateVehicle(MachineDTO machineDTO) {
         try {
             Optional<MachineEntity> vehicleExist = this.vehicleRepository.findById(machineDTO.getMachineSambaId());
+            Optional<TypeMachineryEntity> typeMachineExist = this.typeMachineryRepository.findById(machineDTO.getTypeMachineId());
             if (vehicleExist.isPresent()) {
-                MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
-                this.vehicleRepository.save(machineEntity);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_SUCCESS)
-                        .objectResponse(IMachineResponse.UPDATE_SUCCESS)
-                        .statusCode(HttpStatus.OK.value())
-                        .build());
+                if(typeMachineExist.isPresent()) {
+                    MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
+                    TypeMachineryEntity typeMachine = typeMachineExist.get();
+                    machineEntity.setMachineType(typeMachine.getTypeMachinaryName());
+                    this.vehicleRepository.save(machineEntity);
+                    return ResponseEntity.ok(GenericResponseDTO.builder()
+                            .message(IMachineResponse.OPERATION_SUCCESS)
+                            .objectResponse(IMachineResponse.UPDATE_SUCCESS)
+                            .statusCode(HttpStatus.OK.value())
+                            .build());
+                } else {
+                    return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                            .message(IMachineResponse.OPERATION_FAIL + ", el tipo de maquina ingresado no existe")
+                            .objectResponse(IMachineResponse.UPDATE_FAIL)
+                            .statusCode(HttpStatus.OK.value())
+                            .build());
+                }
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.UPDATE_FAIL)
                         .statusCode(HttpStatus.OK.value())

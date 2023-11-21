@@ -7,4 +7,5 @@ public interface IMaintenanceEndPoint {
     String READ_ALL_MAINTENANCE = "/readAll";
     String UPDATE_MAINTENANCE = "/update";
     String DELETE_MAINTENANCE = "/delete";
+    String THERE_IS_MAINTENANCE = "/maintenance-type-machine{typeMachineId}";
 }
