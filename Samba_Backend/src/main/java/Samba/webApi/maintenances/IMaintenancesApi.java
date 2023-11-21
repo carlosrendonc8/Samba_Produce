@@ -18,4 +18,6 @@ public interface IMaintenancesApi {
     ResponseEntity<GenericResponseDTO> updateMaintenance(@RequestBody MaintenancesDTO maintenancesDTO);
     @DeleteMapping(IMaintenanceEndPoint.DELETE_MAINTENANCE)
     ResponseEntity<GenericResponseDTO> deleteMaintenance(@RequestBody MaintenancesDTO maintenancesDTO);
+    @GetMapping(IMaintenanceEndPoint.THERE_IS_MAINTENANCE)
+    ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(@PathVariable Integer typeMachineId);
 }

@@ -1,4 +1,4 @@
-/*
+
 package Samba.webApi.typeMachinery.implement;
 
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
@@ -76,8 +76,8 @@ public class TypeMachineryApi implements ITypeMachineryApi
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> readAllMachinery() {
-        return this.typeMachineryService.readAllMachinery();
+    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachinaryId) {
+        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachinaryId);
     }
     @Override
     @Operation(summary = "actualiza la maquinaria")
@@ -110,8 +110,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO) {
-        return this.typeMachineryService.deleteTypeMachinery(typeMachineryDTO);
+    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachinaryId) {
+        return this.typeMachineryService.deleteTypeMachinery(typeMachinaryId);
     }
 }
-*/
