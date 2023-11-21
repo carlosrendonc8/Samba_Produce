@@ -99,10 +99,10 @@ public class MachineService implements IMachineService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -123,10 +123,10 @@ public class MachineService implements IMachineService
             if (!vehicleExist.isEmpty()) {
                 System.out.println("Entramos al Metodo leer");
                 vehicleExist.forEach(item -> listDTO.add(machineConverter.convertMachineEntityToMachineDTO(item)));
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_SUCCESS)
-                        .objectResponse(listDTO)
-                        .statusCode(HttpStatus.OK.value())
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(IMachineResponse.OPERATION_FAIL)
+                        .objectResponse(IMachineResponse.OPERATION_FAIL)
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             } else {
                 return ResponseEntity.ok(GenericResponseDTO.builder()
@@ -166,14 +166,14 @@ public class MachineService implements IMachineService
                     return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                             .message(IMachineResponse.OPERATION_FAIL + ", el tipo de maquina ingresado no existe")
                             .objectResponse(IMachineResponse.UPDATE_FAIL)
-                            .statusCode(HttpStatus.OK.value())
+                            .statusCode(HttpStatus.BAD_REQUEST.value())
                             .build());
                 }
             } else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.UPDATE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -200,10 +200,10 @@ public class MachineService implements IMachineService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.DELETE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
