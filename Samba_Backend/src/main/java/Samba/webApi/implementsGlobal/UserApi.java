@@ -1,4 +1,4 @@
-package Samba.webApi.user.implement;
+package Samba.webApi.implementsGlobal;
 
 
 import Samba.commons.constans.endpoints.user.IUserEndPoint;
@@ -60,7 +60,6 @@ public class UserApi implements IUserApi {
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(IUserEndPoint.CREATE_USER)
     public ResponseEntity<GenericResponseDTO> saveUser(@RequestBody UserDTO userDTO) {
-        System.out.println("Prueba Entrada " + userDTO.getUserId());
         return this.userService.saveUser(userDTO);
     }
 

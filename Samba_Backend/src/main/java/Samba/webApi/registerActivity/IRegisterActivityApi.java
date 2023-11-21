@@ -10,7 +10,7 @@ public interface IRegisterActivityApi {
     @PostMapping(IRegisterActivityEndPoint.CREATE_REGISTER_ACTIVITY)
     ResponseEntity<GenericResponseDTO> createRegisterActivity (@RequestBody RegisterActivityDTO registerActivityDTO);
     @GetMapping(IRegisterActivityEndPoint.READ_REGISTER_ACTIVITY)
-    ResponseEntity<GenericResponseDTO> readRegisterActivity(@RequestBody RegisterActivityDTO registerActivityDTO);
+    ResponseEntity<GenericResponseDTO> readRegisterActivity(@PathVariable Integer registerActivityId);
     @GetMapping(IRegisterActivityEndPoint.READ_ALL_REGISTER_ACTIVITY)
     ResponseEntity<GenericResponseDTO> readAllRegisterActivity();
     @PutMapping(IRegisterActivityEndPoint.UPDATE_REGISTER_ACTIVITY)

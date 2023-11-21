@@ -17,7 +17,7 @@ public interface IMachineApi
         @PutMapping(IMachineEndPoint.UPDATE_MACHINE)
         ResponseEntity<GenericResponseDTO> updateTypeMachine(@RequestBody MachineDTO machineDTO);
         @DeleteMapping(IMachineEndPoint.DELETE_MACHINE)
-        ResponseEntity<GenericResponseDTO> deleteTypeMachine(@RequestBody MachineDTO machineDTO);
+        ResponseEntity<GenericResponseDTO> deleteTypeMachine(@PathVariable Integer machineId);
         @GetMapping(IMachineEndPoint.READ_MACHINE_ID)
         ResponseEntity<GenericResponseDTO> readMachineId(@PathVariable Integer machineId);
 }
