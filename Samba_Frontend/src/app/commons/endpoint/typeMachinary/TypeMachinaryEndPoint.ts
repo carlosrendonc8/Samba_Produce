@@ -1,7 +1,7 @@
-export const TYPEMACHINEY_BASE_URL = 'http://localhost:8080/machinery';
-export const TYPEMACHINARY_CREATE = "/create-typeMachinery";
-export const TYPEMACHINARY_EDIT = "/edit-typeMachinery";
-export const TYPEMACHINARY_READ = "/readAll";
-export const TYPEMACHINARY_READ_ENTITY = "/readEntity-typeMachinery";
-export const TYPEMACHINARY_DELETE = "/delete-typeMachinery";
-export const TYPEMACHINARY_READ_ID = "/readId-typeMachinary"
+export const TYPEMACHINERY_BASE_URL = 'http://localhost:8080/type-machinery';
+export const TYPEMACHINERY_CREATE = "/create";
+export const TYPEMACHINERY_READ = "/read/{typeMachineryId}";
+export const TYPEMACHINERY_READ_ENTITY = "/readAll/{typeMachinaryId}";
+export const TYPEMACHINERY_EDIT = "/update";
+export const TYPEMACHINERY_DELETE = "/delete/{typeMachinaryId}";
+export const TYPEMACHINERY_READ_ALL = "/readAll";
