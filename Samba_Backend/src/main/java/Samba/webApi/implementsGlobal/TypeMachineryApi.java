@@ -96,6 +96,12 @@ public class TypeMachineryApi implements ITypeMachineryApi
     public ResponseEntity<GenericResponseDTO> updateTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO) {
         return this.typeMachineryService.updateTypeMachinery(typeMachineryDTO);
     }
+
+    @Override
+    @GetMapping(ITypeMachineEndPoint.READ_ALL)
+    public ResponseEntity<GenericResponseDTO> readAll(){
+        return this.typeMachineryService.readAll();
+    }
     @Override
     @Operation(summary = "elimina un tipo de maquinaria")
     @ApiResponses(value = {
