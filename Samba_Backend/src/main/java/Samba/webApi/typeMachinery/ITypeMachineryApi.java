@@ -12,6 +12,8 @@ public interface ITypeMachineryApi
     ResponseEntity<GenericResponseDTO> readTypeMachinery(@PathVariable Integer typeMachineryId);
     @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
     ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachineId);
+    @GetMapping
+    ResponseEntity<GenericResponseDTO> readAll();
     @PutMapping(ITypeMachineEndPoint.UPDATE_TYPE_MACHINERY)
     ResponseEntity<GenericResponseDTO> updateTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO);
     @DeleteMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)

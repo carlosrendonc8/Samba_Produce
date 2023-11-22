@@ -91,6 +91,34 @@ public class TypeMachineryService implements ITypeMachineryService
                             .build());
         }
     }
+
+    @Override
+    public ResponseEntity<GenericResponseDTO> readAll(){
+        try {
+            List<TypeMachineryEntity> list = this.typeMachineryRepository.findAll();
+            if(!list.isEmpty()){
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(ITypeMachineryResponse.OPERATION_SUCCESS)
+                        .objectResponse(list)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            } else {
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(ITypeMachineryResponse.OPERATION_FAIL)
+                        .objectResponse(ITypeMachineryResponse.NOT_FOUND)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            }
+        } catch (Exception e){
+            log.error("Ha ocurrido un error interno", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(ITypeMachineryResponse.INTERNAL_SERVER)
+                            .objectResponse(null)
+                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
+    }
     @Override
     public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachinaryId) {
         System.out.println(typeMachinaryId);
