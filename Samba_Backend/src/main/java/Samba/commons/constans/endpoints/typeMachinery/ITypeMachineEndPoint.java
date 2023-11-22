@@ -8,4 +8,5 @@ public interface ITypeMachineEndPoint
     String READ_ALL_TYPE_MACHINERY = "/readAll{typeMachinaryId}";
     String UPDATE_TYPE_MACHINERY = "/update";
     String DELETE_TYPE_MACHINERY = "/delete{typeMachinaryId}";
+    String READ_ALL = "/readAll";
 }
