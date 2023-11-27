@@ -61,6 +61,7 @@ public class MachineApi implements IMachineApi
         return this.machineService.readAllVehicle();
     }
 
+
     @Override
     @Operation(summary = "actualiza los vehiculos")
     @ApiResponses(value = {
@@ -110,8 +111,8 @@ public class MachineApi implements IMachineApi
             @ApiResponse(responseCode = "500", description = IMachineResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IMachineEndPoint.READ_MACHINE_ID)
-    public ResponseEntity<GenericResponseDTO> readTypeMachine(@PathVariable Integer machineId) {
-        return this.machineService.readVehicleId(machineId);
+    public ResponseEntity<GenericResponseDTO> readTypeMachine(@PathVariable Integer machineSambaId) {
+        return this.machineService.readVehicleId(machineSambaId);
     }
 
     @Override
@@ -128,7 +129,7 @@ public class MachineApi implements IMachineApi
             @ApiResponse(responseCode = "500", description = IMachineResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping
-    public ResponseEntity<GenericResponseDTO> readMachineId(Integer machineId) {
-        return this.machineService.readVehicleId(machineId);
+    public ResponseEntity<GenericResponseDTO> readMachineId(Integer machineSambaId) {
+        return this.machineService.readVehicleId(machineSambaId);
     }
 }

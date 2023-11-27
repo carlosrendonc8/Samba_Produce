@@ -1,7 +1,7 @@
 
 package Samba.webApi.typeMachinery.implement;
 
-import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
+import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineryEndPoint;
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping(ITypeMachineEndPoint.BASE_URL_TYPE_MACHINERY)
+@RequestMapping(ITypeMachineryEndPoint.BASE_URL_TYPE_MACHINERY)
 @Tag( name = "Sistema de Datos de un CRUD de tipo de maquinaria" , description = "Opciones de crear, eliminar, actualizar y ver un tipo de maquinaria")
 public class TypeMachineryApi implements ITypeMachineryApi
 {
@@ -39,7 +39,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ITypeMachineEndPoint.CREATE_TYPE_MACHINERY)
+    @PostMapping(ITypeMachineryEndPoint.CREATE_TYPE_MACHINERY)
     public ResponseEntity<GenericResponseDTO> createTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO) {
         return this.typeMachineryService.createTypeMachinery(typeMachineryDTO);
     }
@@ -56,50 +56,20 @@ public class TypeMachineryApi implements ITypeMachineryApi
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(ITypeMachineEndPoint.READ_TYPE_MACHINERY)
+    @GetMapping(ITypeMachineryEndPoint.READ_TYPE_MACHINERY)
     public ResponseEntity<GenericResponseDTO> readTypeMachinery(@PathVariable Integer typeMachineryId) {
         return this.typeMachineryService.readTypeMachinery(typeMachineryId);
     }
 
     @Override
-    @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
+    @GetMapping(ITypeMachineryEndPoint.READ_ALL_TYPE_MACHINERY)
     public ResponseEntity<GenericResponseDTO> readAll(){
         return this.typeMachineryService.readAll();
     }
 
-    @Override
-    @Operation(summary = "lee toda la maquinaria")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode  = "200", description = ITypeMachineryResponse.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GenericResponseDTO.class))}),
-            @ApiResponse(responseCode  = "400", description = ITypeMachineryResponse.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = ITypeMachineryResponse.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
-                    content = {@Content(mediaType = "application/json")})})
-    @GetMapping(ITypeMachineEndPoint.READ_ALL_MACHINERY_WITH_MAINTENANCE_FOR_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachineryId) {
-        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachineryId);
-    }
-    @Override
-    @Operation(summary = "actualiza la maquinaria")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode  = "200", description = ITypeMachineryResponse.CREATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = GenericResponseDTO.class))}),
-            @ApiResponse(responseCode  = "400", description = ITypeMachineryResponse.UPDATE_SUCCESS,
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
-            @ApiResponse(responseCode  = "404", description = ITypeMachineryResponse.NOT_FOUND,
-                    content = {@Content(mediaType = "application/json")}),
-            @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
-                    content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ITypeMachineEndPoint.UPDATE_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> updateTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO) {
-        return this.typeMachineryService.updateTypeMachinery(typeMachineryDTO);
+    @GetMapping(ITypeMachineryEndPoint.READ_ALL_MACHINES_ENABLE_FOR_TYPE_MACHINERY)
+    public ResponseEntity<GenericResponseDTO> bringAllMachinesEnablesForTypeMachine(@PathVariable Integer typeMachineryId) {
+        return this.typeMachineryService.bringAllMachinesEnablesForTypeMachine(typeMachineryId);
     }
 
     @Override
@@ -115,7 +85,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)
+    @DeleteMapping(ITypeMachineryEndPoint.DELETE_TYPE_MACHINERY)
     public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachineryId) {
         return this.typeMachineryService.deleteTypeMachinery(typeMachineryId);
     }

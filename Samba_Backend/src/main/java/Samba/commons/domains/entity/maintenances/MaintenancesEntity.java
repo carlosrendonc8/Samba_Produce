@@ -19,8 +19,8 @@ public class MaintenancesEntity {
     private String maintenancesType;
 
     @Column(name = "maintenances_date")
-    private String maintenanceDate;
+    private String maintenancesDate;
 
     @Column(name = "maintenances_machine_name")
-    private String maintenanceMachineName;
+    private String maintenancesMachineName;
 }

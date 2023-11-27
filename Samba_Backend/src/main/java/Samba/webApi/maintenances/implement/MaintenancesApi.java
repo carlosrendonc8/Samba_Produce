@@ -1,4 +1,4 @@
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.maintenances.implement;
 
 import Samba.commons.constans.endpoints.maintenance.IMaintenanceEndPoint;
 import Samba.commons.constans.response.maintenance.IMaintenanceResponse;
@@ -111,11 +111,5 @@ public class MaintenancesApi implements IMaintenancesApi {
     @GetMapping(IMaintenanceEndPoint.DELETE_MAINTENANCE)
     public ResponseEntity<GenericResponseDTO> deleteMaintenance(MaintenancesDTO maintenancesDTO) {
         return this.maintenancesService.deleteMaintenance(maintenancesDTO);
-    }
-
-    @Override
-    @GetMapping(IMaintenanceEndPoint.THERE_IS_MAINTENANCE)
-    public ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(@PathVariable Integer typeMachineId){
-        return this.maintenancesService.thereAreMaintenancesForTypeMachine(typeMachineId);
     }
 }

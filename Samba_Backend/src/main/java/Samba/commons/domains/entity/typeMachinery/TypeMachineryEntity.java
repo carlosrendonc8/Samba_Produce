@@ -8,15 +8,15 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "type_machinary")
+@Table(name = "type_machinery")
 public class TypeMachineryEntity
 {
     @Id
-    @Column(name = "type_machinary_id")
+    @Column(name = "type_machinery_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer typeMachinaryId;
-    @Column(name = "type_machinary_name")
-    public String typeMachinaryName;
+    public Integer typeMachineryId;
+    @Column(name = "type_machinery_name")
+    public String typeMachineryName;
     /*
     @OneToMany(mappedBy = "typeMachineryEntity")
     private List<MachineEntity> listMachineEntity;

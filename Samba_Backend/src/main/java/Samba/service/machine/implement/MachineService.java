@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +45,7 @@ public class MachineService implements IMachineService
                 if (typeMachineExist.isPresent()) {
                     MachineEntity machineEntity = machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                     Integer accumulatedHours = machineEntity.getMachineAccumulatedHours();
-                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
+                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachineryName());
                     machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
                     machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
                     machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
@@ -75,33 +74,6 @@ public class MachineService implements IMachineService
                         .message(IMachineResponse.OPERATION_FAIL + " El id de la maquina ya existe")
                         .objectResponse(IMachineResponse.OPERATION_FAIL)
                         .statusCode(HttpStatus.OK.value())
-                        .build());
-            }
-        } catch (Exception e) {
-            log.error("Ha ocurrido un error interno", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(IMachineResponse.INTERNAL_SERVER)
-                            .objectResponse(null)
-                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                            .build());
-        }
-    }
-    @Override
-    public ResponseEntity<GenericResponseDTO> readVehicle(Integer machineId) {
-        try {
-            List<IAdapterMachine> vehicleExist = this.vehicleRepository.listMachinery(machineId);
-            if (!vehicleExist.isEmpty()) {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_SUCCESS)
-                        .objectResponse(vehicleExist)
-                        .statusCode(HttpStatus.OK.value())
-                        .build());
-            } else {
-                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
-                        .message(IMachineResponse.OPERATION_FAIL)
-                        .objectResponse(IMachineResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -152,7 +124,7 @@ public class MachineService implements IMachineService
                     MachineEntity machineEntity = this.machineConverter.convertMachineDTOToMachineEntity(machineDTO);
                     TypeMachineryEntity typeMachine = typeMachineExist.get();
                     Integer accumulatedHours = machineEntity.getMachineAccumulatedHours();
-                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachinaryName());
+                    machineEntity.setMachineType(typeMachineExist.get().getTypeMachineryName());
                     machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
                     machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 500));
                     machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(accumulatedHours, "00", 250));
@@ -163,7 +135,7 @@ public class MachineService implements IMachineService
                     machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
                     machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
                     machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(accumulatedHours, "00"));
-                    machineEntity.setMachineType(typeMachine.getTypeMachinaryName());
+                    machineEntity.setMachineType(typeMachine.getTypeMachineryName());
                     this.vehicleRepository.save(machineEntity);
                     return ResponseEntity.ok(GenericResponseDTO.builder()
                             .message(IMachineResponse.OPERATION_SUCCESS)
@@ -237,7 +209,7 @@ public class MachineService implements IMachineService
             } else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
-                        .objectResponse(IMachineResponse.NOT_FOUND)
+                        .objectResponse(IMachineResponse.NOT_FOUND  )
                         .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }

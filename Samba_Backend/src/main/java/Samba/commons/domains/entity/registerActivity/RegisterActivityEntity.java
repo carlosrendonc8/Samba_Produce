@@ -1,9 +1,5 @@
 package Samba.commons.domains.entity.registerActivity;
 
-import Samba.commons.domains.entity.machine.MachineEntity;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;

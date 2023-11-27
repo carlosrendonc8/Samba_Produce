@@ -1,3 +1,4 @@
+/*
 package Samba.configuration;
 
 import lombok.Value;
@@ -8,6 +9,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataBaseConfig {
+
 
     /*---------Variables de Entorno Para Despliegue No Tocar-----------
 
@@ -28,5 +30,6 @@ public class DataBaseConfig {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
-    }*/
+    }
 }
+*/
