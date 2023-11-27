@@ -1,4 +1,4 @@
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.machine.implement;
 
 import Samba.commons.constans.endpoints.machine.IMachineEndPoint;
 import Samba.commons.constans.response.machine.IMachineResponse;
@@ -110,7 +110,25 @@ public class MachineApi implements IMachineApi
             @ApiResponse(responseCode = "500", description = IMachineResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @GetMapping(IMachineEndPoint.READ_MACHINE_ID)
-    public ResponseEntity<GenericResponseDTO> readMachineId(@PathVariable Integer machineId) {
+    public ResponseEntity<GenericResponseDTO> readTypeMachine(@PathVariable Integer machineId) {
+        return this.machineService.readVehicleId(machineId);
+    }
+
+    @Override
+    @Operation(summary = "lee un tipo de maquinaria por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = IMachineResponse.CREATE_SUCCESS,
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GenericResponseDTO.class))}),
+            @ApiResponse(responseCode = "400", description = IMachineResponse.CREATE_SUCCESS,
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))}),
+            @ApiResponse(responseCode = "404", description = IMachineResponse.NOT_FOUND,
+                    content = {@Content(mediaType = "application/json")}),
+            @ApiResponse(responseCode = "500", description = IMachineResponse.INTERNAL_SERVER,
+                    content = {@Content(mediaType = "application/json")})})
+    @GetMapping
+    public ResponseEntity<GenericResponseDTO> readMachineId(Integer machineId) {
         return this.machineService.readVehicleId(machineId);
     }
 }

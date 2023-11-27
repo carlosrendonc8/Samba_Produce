@@ -74,11 +74,11 @@ CREATE TABLE type_machinary(
 );
 
 INSERT INTO type_machinary(type_machinary_name) VALUES
-('volqueta'),
-('cosechadora'),
-('tractor'),
-('sembrador'),
-('vehiculo');
+('VOLQUETAS'),
+('COSECHADORAS'),
+('TRACTOR'),
+('SEMBRADOR'),
+('VEHICULO');
 
 /*
 INSERT INTO maintenances(maintenances_name, maintenances_hours) VALUES

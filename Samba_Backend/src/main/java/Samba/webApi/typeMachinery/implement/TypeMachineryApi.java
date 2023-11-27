@@ -1,5 +1,5 @@
 
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.typeMachinery.implement;
 
 import Samba.commons.constans.endpoints.typeMachinery.ITypeMachineEndPoint;
 import Samba.commons.constans.response.typeMachinery.ITypeMachineryResponse;
@@ -66,6 +66,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
     public ResponseEntity<GenericResponseDTO> readAll(){
         return this.typeMachineryService.readAll();
     }
+
     @Override
     @Operation(summary = "lee toda la maquinaria")
     @ApiResponses(value = {
@@ -79,9 +80,9 @@ public class TypeMachineryApi implements ITypeMachineryApi
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachinaryId) {
-        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachinaryId);
+    @GetMapping(ITypeMachineEndPoint.READ_ALL_MACHINERY_WITH_MAINTENANCE_FOR_TYPE_MACHINERY)
+    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachineryId) {
+        return this.typeMachineryService.readAllMachineryForTypeWithMaintenance(typeMachineryId);
     }
     @Override
     @Operation(summary = "actualiza la maquinaria")
@@ -115,7 +116,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
     @PostMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachinaryId) {
-        return this.typeMachineryService.deleteTypeMachinery(typeMachinaryId);
+    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachineryId) {
+        return this.typeMachineryService.deleteTypeMachinery(typeMachineryId);
     }
 }

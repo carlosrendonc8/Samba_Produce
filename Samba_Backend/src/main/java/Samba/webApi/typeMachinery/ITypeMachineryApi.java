@@ -11,11 +11,11 @@ public interface ITypeMachineryApi
     @GetMapping(ITypeMachineEndPoint.READ_TYPE_MACHINERY)
     ResponseEntity<GenericResponseDTO> readTypeMachinery(@PathVariable Integer typeMachineryId);
     @GetMapping(ITypeMachineEndPoint.READ_ALL_TYPE_MACHINERY)
-    ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachineId);
+    ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(@PathVariable Integer typeMachineId);
     @GetMapping
     ResponseEntity<GenericResponseDTO> readAll();
     @PutMapping(ITypeMachineEndPoint.UPDATE_TYPE_MACHINERY)
     ResponseEntity<GenericResponseDTO> updateTypeMachinery(@RequestBody TypeMachineryDTO typeMachineryDTO);
     @DeleteMapping(ITypeMachineEndPoint.DELETE_TYPE_MACHINERY)
-    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachinaryId);
+    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachineryId);
 }
