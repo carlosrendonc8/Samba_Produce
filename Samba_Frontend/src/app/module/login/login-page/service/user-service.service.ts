@@ -12,7 +12,6 @@ export class UserServiceService {
   constructor(private http: HttpClient) { }
 
   userService(params: { userEmail: string; userPassword: string; }): Observable<GenericResponseDTO> {
-    console.log( "entramos")
     return this.http
     .post<GenericResponseDTO>(USER_BASE_URL + USER_SERVICE, params);
   }
