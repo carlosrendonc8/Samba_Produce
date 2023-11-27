@@ -7,12 +7,10 @@ import { GenericResponseDTO } from 'src/app/commons/response/GenericResponseDTO'
 @Injectable({
   providedIn: 'root'
 })
-export class ReadListMachineryService {
+export class ReadAllMachineServiceService {
+  constructor(private http:HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  readListMachinery(index: number): Observable<GenericResponseDTO>{
-    console.log("id de la consulta" + (index + 1));
+  readAllMachine() : Observable<GenericResponseDTO>{
     return this.http.get<GenericResponseDTO>(MACHINE_BASE_URL + MACHINE_READ_ALL);
   }
 }

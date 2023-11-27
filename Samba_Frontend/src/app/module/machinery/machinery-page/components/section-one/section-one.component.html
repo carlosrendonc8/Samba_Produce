@@ -16,31 +16,7 @@
 
             <div class="d-flex justify-content-center">
                 <h4 class="m-3">{{machinery.typeMachinaryName}}</h4>
-            </div> 
-
-            <div [ngSwitch]="machinery.typeMachinaryStatus" class="d-flex justify-content-center px-3">
-                <div *ngSwitchCase="'Advertencia'" class="w-100 border_top_advertencia py-3 px-2">
-                    <div  class="m-1 width_div">                  
-                       <div class="p-1 width_div border_status bg_status_advertencia">
-                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
-                       </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase="'Pendiente'" class="w-100 border_top_pendiente py-3 px-2">
-                    <div  class="m-1 width_div">                  
-                       <div class="p-1 width_div border_status bg_status_pendiente">
-                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
-                       </div>
-                    </div>
-                </div>
-                <div *ngSwitchDefault class="w-100 border_top py-3 px-2">
-                    <div  class="m-1 width_div">                  
-                       <div class="p-1 width_div border_status bg_status">
-                            <p class="text-center p-1">{{machinery.typeMachinaryStatus}}</p>
-                       </div>
-                    </div>
-                </div>
-            </div>       
+            </div>      
         </a>
     </div>  
 </section>
