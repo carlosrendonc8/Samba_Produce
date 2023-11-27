@@ -1,4 +1,4 @@
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.user.implement;
 
 
 import Samba.commons.constans.endpoints.user.IUserEndPoint;

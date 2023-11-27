@@ -8,8 +8,7 @@ public interface ITypeMachineryService
 {
     ResponseEntity<GenericResponseDTO> createTypeMachinery(TypeMachineryDTO typeMachineryDTO);
     ResponseEntity<GenericResponseDTO> readTypeMachinery(Integer typeMachineryId);
-    ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachine);
+    ResponseEntity<GenericResponseDTO> bringAllMachinesEnablesForTypeMachine(Integer typeMachineryId);
     ResponseEntity<GenericResponseDTO> readAll();
-    ResponseEntity<GenericResponseDTO> updateTypeMachinery(TypeMachineryDTO typeMachineryDTO);
-    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachinaryId);
+    ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachineryId);
 }

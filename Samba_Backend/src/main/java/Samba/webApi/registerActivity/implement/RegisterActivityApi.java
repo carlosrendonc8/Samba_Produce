@@ -1,4 +1,4 @@
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.registerActivity.implement;
 
 import Samba.commons.constans.endpoints.registerActivity.IRegisterActivityEndPoint;
 import Samba.commons.constans.response.registerActivity.IRegisterActivityResponse;
