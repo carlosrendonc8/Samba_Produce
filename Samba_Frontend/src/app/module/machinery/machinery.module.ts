@@ -7,7 +7,7 @@ import { SectionOneComponent } from './machinery-page/components/section-one/sec
 import { HttpClientModule } from '@angular/common/http';
 
 import { ComponentModule } from "../../component/component.module";
-import { ReadTypeMachinaryIdService } from './machinery-page/service/read-type-machinary-id.service';
+import { ReadTypeMachinaryService } from './machinery-page/service/read-type-machinary.service';
 
 
 
@@ -24,7 +24,7 @@ import { ReadTypeMachinaryIdService } from './machinery-page/service/read-type-m
         ComponentModule
     ],
     providers: [
-        ReadTypeMachinaryIdService
+        ReadTypeMachinaryService
     ]
 })
 export class MachineryModule { }
