@@ -68,7 +68,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
     }
 
     @GetMapping(ITypeMachineryEndPoint.READ_ALL_MACHINES_ENABLE_FOR_TYPE_MACHINERY)
-    public ResponseEntity<GenericResponseDTO> bringAllMachinesEnablesForTypeMachine(@PathVariable Integer typeMachineryId){
+    public ResponseEntity<GenericResponseDTO> bringAllMachinesEnablesForTypeMachine(@PathVariable Integer typeMachineryId) {
         return this.typeMachineryService.bringAllMachinesEnablesForTypeMachine(typeMachineryId);
     }
 
@@ -85,7 +85,7 @@ public class TypeMachineryApi implements ITypeMachineryApi
                     content = {@Content(mediaType = "application/json")}),
             @ApiResponse(responseCode  = "500", description = ITypeMachineryResponse.INTERNAL_SERVER,
                     content = {@Content(mediaType = "application/json")})})
-    @PostMapping(ITypeMachineryEndPoint.DELETE_TYPE_MACHINERY)
+    @DeleteMapping(ITypeMachineryEndPoint.DELETE_TYPE_MACHINERY)
     public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(@PathVariable Integer typeMachineryId) {
         return this.typeMachineryService.deleteTypeMachinery(typeMachineryId);
     }

@@ -12,10 +12,12 @@ public interface IMachineApi
         ResponseEntity<GenericResponseDTO> createTypeMachine (@RequestBody MachineDTO machineDTO);
         @GetMapping(IMachineEndPoint.READ_ALL_MACHINE)
         ResponseEntity<GenericResponseDTO> readAllMachine();
+        @GetMapping(IMachineEndPoint.READ_MACHINE_ID)
+        public ResponseEntity<GenericResponseDTO> readTypeMachine(@PathVariable Integer machineSambaId);
         @PutMapping(IMachineEndPoint.UPDATE_MACHINE)
         ResponseEntity<GenericResponseDTO> updateTypeMachine(@RequestBody MachineDTO machineDTO);
         @DeleteMapping(IMachineEndPoint.DELETE_MACHINE)
         ResponseEntity<GenericResponseDTO> deleteTypeMachine(@PathVariable Integer machineId);
         @GetMapping(IMachineEndPoint.READ_MACHINE_ID)
-        ResponseEntity<GenericResponseDTO> readMachineId(@PathVariable Integer machineId);
+        ResponseEntity<GenericResponseDTO> readMachineId(@PathVariable Integer machineSambaId);
 }
