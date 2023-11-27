@@ -1,4 +1,4 @@
-package Samba.webApi.implementsGlobal;
+package Samba.webApi.machine.implement;
 
 import Samba.commons.constans.endpoints.machine.IMachineEndPoint;
 import Samba.commons.constans.response.machine.IMachineResponse;

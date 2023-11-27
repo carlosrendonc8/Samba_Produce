@@ -10,8 +10,6 @@ public interface IMachineApi
 {
         @PostMapping(IMachineEndPoint.CREATE_MACHINE)
         ResponseEntity<GenericResponseDTO> createTypeMachine (@RequestBody MachineDTO machineDTO);
-        @GetMapping(IMachineEndPoint.READ_MACHINE)
-        ResponseEntity<GenericResponseDTO> readTypeMachine(@PathVariable Integer machineId);
         @GetMapping(IMachineEndPoint.READ_ALL_MACHINE)
         ResponseEntity<GenericResponseDTO> readAllMachine();
         @PutMapping(IMachineEndPoint.UPDATE_MACHINE)

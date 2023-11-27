@@ -19,8 +19,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build();
-                //.apiInfo(apiInfoMetaData());
+                .build()
+                .apiInfo(apiInfoMetaData());
     }
 
     private ApiInfo apiInfoMetaData(){

@@ -10,5 +10,4 @@ public interface IMaintenancesService {
     ResponseEntity<GenericResponseDTO> readAllMaintenance();
     ResponseEntity<GenericResponseDTO> updateMaintenance(MaintenancesDTO maintenancesDTO);
     ResponseEntity<GenericResponseDTO> deleteMaintenance(MaintenancesDTO maintenancesDTO);
-    ResponseEntity<GenericResponseDTO> thereAreMaintenancesForTypeMachine(Integer typeMachineId);
 }

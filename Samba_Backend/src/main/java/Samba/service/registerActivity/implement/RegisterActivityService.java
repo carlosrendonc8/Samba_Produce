@@ -4,20 +4,18 @@ import Samba.commons.constans.response.registerActivity.IRegisterActivityRespons
 import Samba.commons.converter.registerActivity.RegisterActivityConverter;
 import Samba.commons.domains.DTO.registerActivity.RegisterActivityDTO;
 import Samba.commons.domains.entity.machineImplements.MachineImplementsEntity;
+import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
 import Samba.commons.domains.responseDTO.GenericResponseDTO;
 import Samba.commons.domains.entity.machine.MachineEntity;
-import Samba.commons.domains.entity.registerActivity.RegisterActivityEntity;
 import Samba.components.MaintenanceLogic;
 import Samba.repository.machine.IMachineRepository;
 import Samba.repository.machineImplements.IMachineImplementsRepository;
 import Samba.repository.registerActivity.IRegisterActivityRepository;
 import Samba.service.registerActivity.IRegisterActivityService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +29,6 @@ public class RegisterActivityService implements IRegisterActivityService {
     private final MaintenanceLogic maintenanceLogic;
     private final IMachineImplementsRepository implementsRepository;
 
-    @Autowired
     public RegisterActivityService(IRegisterActivityRepository registerActivityRepository, IMachineRepository machineRepository,
                                    RegisterActivityConverter registerActivityConverter, MaintenanceLogic maintenanceLogic,
                                    IMachineImplementsRepository implementsRepository){

@@ -46,10 +46,10 @@ public class TypeMachineryService implements ITypeMachineryService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -67,18 +67,17 @@ public class TypeMachineryService implements ITypeMachineryService
         try {
             Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryId);
             if (typeMachineryExist.isPresent()) {
-                TypeMachineryDTO typeMachineryDTO =
-                        this.typeMachineryConverter.convertTypeMachineryEntityToTypeMachineryDTO(typeMachineryExist.get());
+                TypeMachineryEntity entity = typeMachineryExist.get();
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_SUCCESS)
-                        .objectResponse(typeMachineryDTO)
+                        .objectResponse(entity)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -103,10 +102,10 @@ public class TypeMachineryService implements ITypeMachineryService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.NOT_FOUND)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e){
@@ -120,79 +119,38 @@ public class TypeMachineryService implements ITypeMachineryService
         }
     }
     @Override
-    public ResponseEntity<GenericResponseDTO> readAllMachineryForTypeWithMaintenance(Integer typeMachinaryId) {
-        System.out.println(typeMachinaryId);
+    public ResponseEntity<GenericResponseDTO> bringAllMachinesEnablesForTypeMachine(Integer typeMachineryId){
         try {
-            Optional<TypeMachineryEntity> typeMachineryEntityExist = this.typeMachineryRepository.findById(typeMachinaryId);
-            List<MachineEntity> machineEntityExist = this.machineRepository.findAll();
-            System.out.println(typeMachineryEntityExist);
-            System.out.println(machineEntityExist);
-            if (typeMachineryEntityExist.isPresent() && !machineEntityExist.isEmpty()) {
-                List<MachineEntity> machineWithMaintenanceList = new ArrayList<>();
-                for(MachineEntity machineEntity : machineEntityExist){
-                    if(machineEntity.getMachineType().equals(typeMachineryEntityExist.get().getTypeMachinaryName())){
-                        if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineEngineOilChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineOilFilterChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFuelFilterChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineHydraulicOilChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineDifferentialOilChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFrontAxleLubrication())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachinePlanetaryGearOilChange())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineRockerLubrication())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineFlannelLubrication())){
-                            machineWithMaintenanceList.add(machineEntity);
-                        } else if(this.maintenanceLogic.doesItHaveMaintenance(machineEntity.getMachineCrossheadLubrication())){
-                            machineWithMaintenanceList.add(machineEntity);
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryId);
+            List<MachineEntity> machineList = this.machineRepository.findAll();
+            List<MachineEntity> machinesEnable = new ArrayList<>();
+            if(typeMachineryExist.isPresent() && !machineList.isEmpty()){
+                for(MachineEntity machineEntity : machineList) {
+                    if (machineEntity.getMachineType().equals(typeMachineryExist.get().typeMachineryName)) {
+                        if (!this.maintenanceLogic.needMaintenance(machineEntity.getMachineEngineOilChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineOilFilterChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineFuelFilterChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineHydraulicOilChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineDifferentialOilChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineFrontAxleLubrication()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachinePlanetaryGearOilChange()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineRockerLubrication()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineFlannelLubrication()) &&
+                            !this.maintenanceLogic.needMaintenance(machineEntity.getMachineCrossheadLubrication())) {
+                                machinesEnable.add(machineEntity);
                         }
                     }
                 }
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_SUCCESS)
-                        .objectResponse(machineWithMaintenanceList)
+                        .objectResponse(machinesEnable)
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
                 return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
-                        .build());
-            }
-        } catch (Exception e) {
-            log.error("Ha ocurrido un error interno", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(GenericResponseDTO.builder()
-                            .message(ITypeMachineryResponse.INTERNAL_SERVER)
-                            .objectResponse(null)
-                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                            .build());
-        }
-    }
-    @Override
-    public ResponseEntity<GenericResponseDTO> updateTypeMachinery(TypeMachineryDTO typeMachineryDTO) {
-        try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryDTO.getTypeMachinaryId());
-            if (typeMachineryExist.isPresent()) {
-                TypeMachineryEntity typeMachineryEntity = typeMachineryConverter.convertTypeMachineryDTOToTypeMachineryEntity(typeMachineryDTO);
-                this.typeMachineryRepository.save(typeMachineryEntity);
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(ITypeMachineryResponse.OPERATION_SUCCESS)
-                        .objectResponse(ITypeMachineryResponse.UPDATE_SUCCESS)
-                        .statusCode(HttpStatus.OK.value())
-                        .build());
-            } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
-                        .message(ITypeMachineryResponse.OPERATION_FAIL)
-                        .objectResponse(ITypeMachineryResponse.UPDATE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {
@@ -207,15 +165,15 @@ public class TypeMachineryService implements ITypeMachineryService
     }
 
     @Override
-    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachinaryId) {
+    public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachineryId) {
         try {
-            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachinaryId);
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryId);
             List<MachineEntity> machineEntityList = this.machineRepository.findAll();
             if (typeMachineryExist.isPresent()) {
                 TypeMachineryEntity typeMachineryEntity = typeMachineryExist.get();
                 if(!machineEntityList.isEmpty()){
                     for(MachineEntity machineEntity : machineEntityList){
-                        if(machineEntity.getMachineType().equals(typeMachineryEntity.getTypeMachinaryName())){
+                        if(machineEntity.getMachineType().equals(typeMachineryEntity.getTypeMachineryName())){
                             this.machineRepository.delete(machineEntity);
                         }
                     }
@@ -230,7 +188,7 @@ public class TypeMachineryService implements ITypeMachineryService
                 return ResponseEntity.ok(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.DELETE_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         } catch (Exception e) {

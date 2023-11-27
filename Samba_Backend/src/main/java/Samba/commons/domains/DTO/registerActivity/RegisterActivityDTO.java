@@ -1,6 +1,5 @@
 package Samba.commons.domains.DTO.registerActivity;
 
-import Samba.commons.domains.entity.machine.MachineEntity;
 import lombok.*;
 import java.io.Serializable;
 import java.time.LocalDate;

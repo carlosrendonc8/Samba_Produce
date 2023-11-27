@@ -6,13 +6,11 @@ import Samba.commons.domains.DTO.user.UserDTO;
 import Samba.commons.domains.entity.user.UserEntity;
 import Samba.commons.helpers.HelperMapper;
 import io.micrometer.common.util.internal.logging.InternalLogger;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 
 @Component
-@Log4j2
 public class UserConverter {
     private InternalLogger log;
 

@@ -74,12 +74,7 @@ public class MaintenanceLogic {
         }
     }
 
-    public boolean doesItHaveMaintenance(String stateCode){
-        if(stateCode.charAt(1) == '0'){
-            if(stateCode.charAt(0) == '1' || stateCode.charAt(0) == '2'){
-                return true;
-            }
-        }
-        return false;
+    public boolean needMaintenance(String stateCode){
+        return stateCode.charAt(0) == '1' || stateCode.charAt(0) == '2' && stateCode.charAt(1) == '0';
     }
 }
