@@ -9,13 +9,13 @@
 
     <div class="d-flex justify-content-around m-5">
 
-        <a *ngFor="let machinery of typeMachine; let i = index" (click)="prueba(i)" class="border square col-2 interaction text-decoration-none text-black rout" routerLink="/samba-list-machinery-page">
+        <a *ngFor="let machinery of typeMachine; let i = index" (click)="enviarIdCategoria(i)" class="border square col-2 interaction text-decoration-none text-black rout" routerLink="/samba-list-machinery-page">
             <div class="d-flex align-items-center p-4">
                 <img class="image_one border_radius w-100" [src]="imageN1" alt="">
             </div>
 
             <div class="d-flex justify-content-center">
-                <h4 class="m-3">{{machinery.typeMachinaryName}}</h4>
+                <h4 class="m-3">{{machinery.typeMachineryName}}</h4>
             </div>      
         </a>
     </div>  
