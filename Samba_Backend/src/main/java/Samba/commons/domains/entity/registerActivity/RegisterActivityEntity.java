@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "register_activity_samba")
 public class RegisterActivityEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "register_activity_id")
     private int registerActivityId;
     @Column(name = "register_activity_date")
@@ -27,12 +28,4 @@ public class RegisterActivityEntity {
     private String registerActivityImplementMachine;
     @Column(name = "register_activity_machine_id")
     private String registerActivityMachineId;
-
-    /*
-    @ManyToOne()
-    @JoinColumn(name = "machine_samba")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "machine_id")
-    @JsonIgnore
-    private MachineEntity machineEntity;
-     */
 }

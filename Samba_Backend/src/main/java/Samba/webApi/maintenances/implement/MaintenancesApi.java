@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(IMaintenanceEndPoint.BASE_URL_MAINTENANCE)
 @Tag( name = "Sistema de Datos de un CRUD de Mantenimientos" , description = "Opciones de crear, eliminar, actualizar y ver mantenimientos")
 public class MaintenancesApi implements IMaintenancesApi {
-    private final MaintenancesService maintenancesService;
 
-    public MaintenancesApi(MaintenancesService maintenancesService) {this.maintenancesService = maintenancesService;}
+    @Autowired
+    private MaintenancesService maintenancesService;
 
     @Override
     @Operation(summary = "crea un mantenimiento")

@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,11 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(IRegisterActivityEndPoint.BASE_URL_REGISTER_ACTIVITY)
 @Tag( name = "Sistema de Datos de un CRUD de un Registro de Actividad" , description = "Opciones de crear, eliminar, actualizar y ver un registro de actividad")
 public class RegisterActivityApi implements IRegisterActivityApi {
-    public final RegisterActivityService registerActivityService;
 
-    public RegisterActivityApi(RegisterActivityService registerActivityService) {
-        this.registerActivityService = registerActivityService;
-    }
+    @Autowired
+    public RegisterActivityService registerActivityService;
 
     @Override
     @Operation(summary = "crea un registro de actividad")

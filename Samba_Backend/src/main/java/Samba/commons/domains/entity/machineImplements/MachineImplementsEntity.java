@@ -11,6 +11,7 @@ import lombok.*;
 @Table(name = "machine_implements")
 public class MachineImplementsEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "machine_implement_id")
     public Integer machineImplementId;
     @Column(name = "machine_implement_name")
