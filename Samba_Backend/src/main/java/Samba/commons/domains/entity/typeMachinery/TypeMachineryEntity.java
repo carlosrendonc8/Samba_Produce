@@ -14,11 +14,7 @@ public class TypeMachineryEntity
     @Id
     @Column(name = "type_machinery_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer typeMachineryId;
+    private Integer typeMachineryId;
     @Column(name = "type_machinery_name")
-    public String typeMachineryName;
-    /*
-    @OneToMany(mappedBy = "typeMachineryEntity")
-    private List<MachineEntity> listMachineEntity;
-    */
+    private String typeMachineryName;
 }

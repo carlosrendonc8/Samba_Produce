@@ -8,6 +8,7 @@ import Samba.commons.domains.DTO.typeMachinery.TypeMachineryDTO;
 import Samba.service.typeMachinery.implement.TypeMachineryService;
 import Samba.webApi.typeMachinery.ITypeMachineryApi;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +21,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(ITypeMachineryEndPoint.BASE_URL_TYPE_MACHINERY)
 @Tag( name = "Sistema de Datos de un CRUD de tipo de maquinaria" , description = "Opciones de crear, eliminar, actualizar y ver un tipo de maquinaria")
-public class TypeMachineryApi implements ITypeMachineryApi
-{
-    private final TypeMachineryService typeMachineryService;
-    public TypeMachineryApi(TypeMachineryService typeMachineryService) {
-        this.typeMachineryService = typeMachineryService;
-    }
+public class TypeMachineryApi implements ITypeMachineryApi {
+
+    @Autowired
+    private TypeMachineryService typeMachineryService;
+
     @Override
     @Operation(summary = "crea un tipo de maquinaria")
     @ApiResponses(value = {

@@ -23,10 +23,13 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
-    private IUserRepository iUserRepository;
-    @Autowired
-    private UserConverter userConverter;
+    private final IUserRepository iUserRepository;
+    private final UserConverter userConverter;
+
+    public UserService(IUserRepository iUserRepository, UserConverter userConverter){
+        this.iUserRepository = iUserRepository;
+        this.userConverter = userConverter;
+    }
 
 
 
@@ -71,8 +74,7 @@ public class UserService implements IUserService {
     @Override
     public ResponseEntity<GenericResponseDTO> saveUser(UserDTO userDTO) {
         try {
-            Optional<UserEntity> existeUser;
-            existeUser = iUserRepository.findById(userDTO.getUserId());
+            Optional<UserEntity> existeUser = iUserRepository.findById(userDTO.getUserId());
             if(!existeUser.isPresent()){
                 UserEntity userEntity = userConverter.convertUserDTOToUserEntityEncrypt(userDTO);
                 iUserRepository.save(userEntity);

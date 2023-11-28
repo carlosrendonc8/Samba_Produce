@@ -126,7 +126,7 @@ public class TypeMachineryService implements ITypeMachineryService
             List<MachineEntity> machinesEnable = new ArrayList<>();
             if(typeMachineryExist.isPresent() && !machineList.isEmpty()){
                 for(MachineEntity machineEntity : machineList) {
-                    if (machineEntity.getMachineType().equals(typeMachineryExist.get().typeMachineryName)) {
+                    if (machineEntity.getMachineType().equals(typeMachineryExist.get().getTypeMachineryName())) {
                         if (!this.maintenanceLogic.needMaintenance(machineEntity.getMachineEngineOilChange()) &&
                             !this.maintenanceLogic.needMaintenance(machineEntity.getMachineOilFilterChange()) &&
                             !this.maintenanceLogic.needMaintenance(machineEntity.getMachineFuelFilterChange()) &&
@@ -185,7 +185,7 @@ public class TypeMachineryService implements ITypeMachineryService
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(ITypeMachineryResponse.OPERATION_FAIL)
                         .objectResponse(ITypeMachineryResponse.DELETE_FAIL)
                         .statusCode(HttpStatus.BAD_REQUEST.value())

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(IMachineImplementsEndPoint.BASE_URL_MACHINE_IMPLEMENTS)
 @Tag( name = "Sistema de Datos de un CRUD para leer los Implementos de Maquinaria" , description = "Opcion de leer todos los implementos")
 public class MachineImplementsApi implements IMachineImplementsApi {
-    private final MachineImplementsService machineImplementsService;
 
-    public MachineImplementsApi(MachineImplementsService machineImplementsService) {this.machineImplementsService = machineImplementsService;}
+    @Autowired
+    private MachineImplementsService machineImplementsService;
+
     @Override
     @Operation(summary = "lee toda los implementos")
     @ApiResponses(value = {

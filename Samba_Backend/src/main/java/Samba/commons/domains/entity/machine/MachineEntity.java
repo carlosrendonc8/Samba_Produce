@@ -11,6 +11,7 @@ import lombok.*;
 public class MachineEntity
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "machine_id")
     private Integer machineSambaId;
 

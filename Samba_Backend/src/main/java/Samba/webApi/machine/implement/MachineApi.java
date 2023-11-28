@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
@@ -19,11 +20,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag( name = "Sistema de Datos de un CRUD de un Vehiculo" , description = "Opciones de crear, eliminar, actualizar y ver un vehiculo")
 public class MachineApi implements IMachineApi
 {
-    private final MachineService machineService;
-
-    public MachineApi(MachineService machineService) {
-        this.machineService = machineService;
-    }
+    @Autowired
+    private MachineService machineService;
 
     @Override
     @Operation(summary = "crea un vehiculo")
