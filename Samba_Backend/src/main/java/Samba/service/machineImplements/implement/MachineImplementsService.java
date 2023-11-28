@@ -18,10 +18,13 @@ import java.util.List;
 @Log4j2
 @Service
 public class MachineImplementsService implements IMachineImplementsService {
-    @Autowired
-    public IMachineImplementsRepository iMachineImplementsRepository;
-    @Autowired
-    public MachineImplementsConverter machineImplementsConverter;
+    private final IMachineImplementsRepository iMachineImplementsRepository;
+    private final MachineImplementsConverter machineImplementsConverter;
+
+    public MachineImplementsService(IMachineImplementsRepository iMachineImplementsRepository, MachineImplementsConverter machineImplementsConverter){
+        this.iMachineImplementsRepository = iMachineImplementsRepository;
+        this.machineImplementsConverter = machineImplementsConverter;
+    }
 
 
     @Override
@@ -38,10 +41,10 @@ public class MachineImplementsService implements IMachineImplementsService {
                         .statusCode(HttpStatus.OK.value())
                         .build());
             } else {
-                return ResponseEntity.ok(GenericResponseDTO.builder()
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
                         .message(IMachineResponse.OPERATION_FAIL)
                         .objectResponse(IMachineResponse.OPERATION_FAIL)
-                        .statusCode(HttpStatus.OK.value())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
             }
         }
