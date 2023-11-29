@@ -6,6 +6,7 @@ public interface ITypeMachineryEndPoint
     String CREATE_TYPE_MACHINERY = "/create";
     String READ_TYPE_MACHINERY = "/read{typeMachineryId}";
     String READ_ALL_TYPE_MACHINERY = "/read-all";
+    String GET_TYPE_MACHINERY_STATUS = "/type-machinery-status{typeMachineryId}";
     String READ_ALL_MACHINES_ENABLE_FOR_TYPE_MACHINERY = "/read-all-machines-enable-for-type-machinery{typeMachineryId}";
     String DELETE_TYPE_MACHINERY = "/delete{typeMachineryId}";
 }

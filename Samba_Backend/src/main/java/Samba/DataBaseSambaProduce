@@ -29,18 +29,17 @@ CREATE TABLE machine_samba(
     machine_brand VARCHAR(20) NOT NULL,
     machine_type VARCHAR(20) NOT NULL,
     machine_accumulated_hours INT NOT NULL,
-    machine_engine_oil_change VARCHAR(2) NOT NULL,
-    machine_oil_filter_change VARCHAR(2) NOT NULL,
-    machine_fuel_filter_change VARCHAR(2) NOT NULL,
-    machine_hydraulic_oil_change VARCHAR(2) NOT NULL,
-    machine_differential_oil_change VARCHAR(2) NOT NULL,
-    machine_front_axle_lubrication VARCHAR(2) NOT NULL,
-    machine_planetary_gear_oil_change VARCHAR(2) NOT NULL,
-    machine_rocker_lubrication VARCHAR(2) NOT NULL,
-    machine_flannel_lubrication VARCHAR(2) NOT NULL,
-    machine_crosshead_lubrication VARCHAR(2) NOT NULL
-    -- type_machinary_id INT,
-    -- FOREIGN KEY (type_machinary_id) REFERENCES type_machine_samba(type_machinary_id)
+    machine_engine_oil_change VARCHAR(2),
+    machine_oil_filter_change VARCHAR(2),
+    machine_fuel_filter_change VARCHAR(2),
+    machine_hydraulic_oil_change VARCHAR(2),
+    machine_differential_oil_change VARCHAR(2),
+    machine_front_axle_lubrication VARCHAR(2),
+    machine_planetary_gear_oil_change VARCHAR(2),
+    machine_rocker_lubrication VARCHAR(2),
+    machine_flannel_lubrication VARCHAR(2),
+    machine_crosshead_lubrication VARCHAR(2),
+    machine_state VARCHAR(10)
 );
 
 
@@ -149,25 +148,19 @@ INSERT INTO machine_implements(machine_implement_name) VALUES
 INSERT INTO machine_samba (machine_name, machine_plate, machine_fuel, machine_color, machine_brand, machine_type, machine_accumulated_hours,
 machine_engine_oil_change, machine_oil_filter_change, machine_fuel_filter_change, machine_hydraulic_oil_change,  machine_differential_oil_change,
 machine_front_axle_lubrication, machine_planetary_gear_oil_change, machine_rocker_lubrication, machine_flannel_lubrication, machine_crosshead_lubrication) VALUES
-('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 'tractor' , 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 'tractor', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 'tractor', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 'cosechadora', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR VALTRA N 2', 'GHI012', 'Diésel', 'Naranja', 'Caterpillar', 'cosechadora',0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR VALTRA N 4', 'JKL345', 'Diésel', 'Gris', 'New Holland', 'cosechadora', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
-('TRACTOR CLERY RD 254A', 'PQR678', 'Gasolina', 'Rojo', 'Massey Ferguson', 'volqueta',0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('TRACTOR CASE F 35 N 1', 'VWX234', 'Diésel', 'Blanco', 'John Deere', 'volqueta', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
-('TRACTOR CASE FARMALL 55', 'YZA567', 'Gasolina', 'Verde', 'Kubota', 'volqueta', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
-('TRACTOR CASE F 35 N 2', 'UVW789', 'Diésel', 'Rojo', 'John Deere','volqueta', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
-('NISSAN', 'MWM-143', 'Diésel', 'Gris', 'NISSAN','sembrador', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('CAMION JAC', 'GHI678', 'Diésel', 'Gris', 'JAC','sembrador', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('RETROEXCAVADORA JCB', 'GHI678', 'Diésel', 'Gris', 'JCB','sembrador', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('COMBINADA JD 1175  # 1', 'VWX567', 'Diésel', 'Verde', 'John Deere','vehiculo', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00' ),
-('COMBINADA JD 1175  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota','vehiculo', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00'),
-('SEMBRADORA  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 'vehiculo', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00');
-
-/*
-SELECT p.machine_id AS idMachine, p.machine_name AS nameMachine, p.machine_color AS colorMachine, p.machine_brand AS brandMachine
-FROM type_machine_samba c
-JOIN machine_samba p ON c.type_machinary_id = p.type_machinary_id WHERE c.type_machinary_id = 3;
-*/
+('TRACTOR JD 6125', 'ABC123', 'Diésel', 'Rojo', 'Komatsu', 'tractor' , 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA' ),
+('TRACTOR JD 6415', 'XYZ789', 'Diésel', 'Verde', 'John Deere', 'tractor', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR JD 5725 N 1', 'LMN456', 'Gasolina', 'Azul', 'Case IH', 'tractor', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR JD 5725 N 2', 'DEF789', 'Diésel', 'Amarillo', 'Volvo', 'cosechadora', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR VALTRA N 2', 'GHI012', 'Diésel', 'Naranja', 'Caterpillar', 'cosechadora',0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR VALTRA N 4', 'JKL345', 'Diésel', 'Gris', 'New Holland', 'cosechadora', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR CLERY RD 254A', 'PQR678', 'Gasolina', 'Rojo', 'Massey Ferguson', 'volqueta',0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR CASE F 35 N 1', 'VWX234', 'Diésel', 'Blanco', 'John Deere', 'volqueta', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR CASE FARMALL 55', 'YZA567', 'Gasolina', 'Verde', 'Kubota', 'volqueta', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('TRACTOR CASE F 35 N 2', 'UVW789', 'Diésel', 'Rojo', 'John Deere','volqueta', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('NISSAN', 'MWM-143', 'Diésel', 'Gris', 'NISSAN','sembrador', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('CAMION JAC', 'GHI678', 'Diésel', 'Gris', 'JAC','sembrador', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('RETROEXCAVADORA JCB', 'GHI678', 'Diésel', 'Gris', 'JCB','sembrador', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('COMBINADA JD 1175  # 1', 'VWX567', 'Diésel', 'Verde', 'John Deere','vehiculo', 0, '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('COMBINADA JD 1175  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota','vehiculo', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA'),
+('SEMBRADORA  # 2', 'YZA890', 'Gasolina', 'Azul', 'Kubota', 'vehiculo', 0 , '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', 'HABILITADA');
