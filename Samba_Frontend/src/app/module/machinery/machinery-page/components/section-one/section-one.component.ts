@@ -49,4 +49,9 @@ export class SectionOneComponent implements OnInit{
       }
     )
   }
+
+  enviarIdCategoria( id : number ){
+    console.log("Prueba de datos " + (id + 1))
+    this.conectorComponentService.compartirDatos( (id + 1) );
+  }
 }

@@ -1,4 +1,4 @@
 export interface TypeMachineryModel{
-    typeMachinaryId: number;
-    typeMachinaryName: string;
+    typeMachineryId: number;
+    typeMachineryName: string;
 }

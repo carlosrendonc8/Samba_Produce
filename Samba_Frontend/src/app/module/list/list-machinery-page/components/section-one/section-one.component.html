@@ -32,11 +32,11 @@
         </thead>
 
         <tbody class="font_text_label text-center my-5">
-          <tr *ngFor="let item of adapter">
-            <td>{{ item.idMachine }}</td>
-            <td>{{ item.nameMachine }}</td>
-            <td>{{ item.colorMachine }}</td>
-            <td>{{ item.brandMachine }}</td>
+          <tr *ngFor="let item of listaMaquinaria">
+            <td>{{item.machinePlate}}</td>
+            <td>{{item.machineName}}</td>
+            <td>{{item.machineColor}}</td>
+            <td>{{item.machineBrand}}</td>
 
             <td>
               <button class="btn_one" routerLink="/samba-edit-machinery-page" type="submit"><i class="fa-solid fa-pen-to-square"></i></button> &nbsp;

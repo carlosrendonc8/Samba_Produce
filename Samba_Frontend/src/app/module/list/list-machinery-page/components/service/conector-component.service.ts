@@ -10,7 +10,7 @@ export class ConectorComponentService {
 
   sharedData$ = this.sharedData.asObservable();
 
-  compartirDatos(datos: number) {
+  compartirDatos(datos : number) {
     this.sharedData.next(datos);
   }
 }
