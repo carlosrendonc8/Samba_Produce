@@ -47,6 +47,9 @@ public class RegisterActivityService implements IRegisterActivityService {
             if (registerExist.isEmpty() && machineExist.isPresent() && implementsExist.isPresent()) {
                 RegisterActivityEntity entity = this.registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 MachineEntity machineEntity = machineExist.get();
+                String[] codes = {machineEntity.getMachineEngineOilChange(), machineEntity.getMachineOilFilterChange(), machineEntity.getMachineFuelFilterChange(), machineEntity.getMachineHydraulicOilChange(),
+                                  machineEntity.getMachineDifferentialOilChange(), machineEntity.getMachineFrontAxleLubrication(), machineEntity.getMachinePlanetaryGearOilChange(),
+                                  machineEntity.getMachineRockerLubrication(), machineEntity.getMachineFlannelLubrication(), machineEntity.getMachineCrossheadLubrication()};
                 machineEntity.setMachineAccumulatedHours(machineEntity.getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
                 machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineEngineOilChange(), 250));
                 machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineOilFilterChange(), 500));
@@ -58,6 +61,7 @@ public class RegisterActivityService implements IRegisterActivityService {
                 machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineRockerLubrication()));
                 machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineFlannelLubrication()));
                 machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(machineEntity.getMachineAccumulatedHours(), machineEntity.getMachineCrossheadLubrication()));
+                machineEntity.setMachineState(this.maintenanceLogic.stateTypeMachinery(codes));
                 entity.setRegisterActivityImplementMachine(implementsExist.get().getMachineImplementName());
                 this.registerActivityRepository.save(entity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()

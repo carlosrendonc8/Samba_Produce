@@ -73,6 +73,12 @@ public class TypeMachineryApi implements ITypeMachineryApi {
     }
 
     @Override
+    @GetMapping(ITypeMachineryEndPoint.GET_TYPE_MACHINERY_STATUS)
+    public ResponseEntity<GenericResponseDTO> getTypeMachineryStatus(@PathVariable Integer typeMachineryId){
+        return this.typeMachineryService.getTypeMachineryState(typeMachineryId);
+    }
+
+    @Override
     @Operation(summary = "elimina un tipo de maquinaria")
     @ApiResponses(value = {
             @ApiResponse(responseCode  = "200", description = ITypeMachineryResponse.CREATE_SUCCESS,

@@ -66,14 +66,6 @@ public class MachineEntity
     @Column(name = "machine_crosshead_lubrication")
     private String machineCrossheadLubrication;
 
-    /*
-    @ManyToOne()
-    @JoinColumn(name = "type_machinary_id")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "typeMachinaryId")
-    @JsonIgnore
-    private TypeMachineryEntity typeMachineryEntity;
-
-    @OneToMany(mappedBy = "machineEntity")
-    public List<RegisterActivityEntity> listRegisterActivity;
-    */
+    @Column(name = "machine_state")
+    private String machineState;
 }

@@ -165,6 +165,47 @@ public class TypeMachineryService implements ITypeMachineryService
     }
 
     @Override
+    public ResponseEntity<GenericResponseDTO> getTypeMachineryState(Integer typeMachineryId){
+        try {
+            String state = "";
+            Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryId);
+            if(typeMachineryExist.isPresent()){
+                List<MachineEntity> machines = this.machineRepository.findAll();
+                for(MachineEntity machineEntity : machines){
+                    if(machineEntity.getMachineType().equals(typeMachineryExist.get().getTypeMachineryName())){
+                        if(machineEntity.getMachineState().equals("HABILITADA")){
+                            state = machineEntity.getMachineState();
+                        } else if (machineEntity.getMachineState().equals("PRECAUCION")) {
+                            state = machineEntity.getMachineState();
+                        } else if (machineEntity.getMachineState().equals("ALERTA")){
+                            state = machineEntity.getMachineState();
+                        }
+                    }
+                }
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(ITypeMachineryResponse.OPERATION_SUCCESS)
+                        .objectResponse(state)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            } else {
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(ITypeMachineryResponse.OPERATION_FAIL)
+                        .objectResponse(ITypeMachineryResponse.OPERATION_FAIL)
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+        } catch (Exception e) {
+            log.error("Ha ocurrido un error interno", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(ITypeMachineryResponse.INTERNAL_SERVER)
+                            .objectResponse(null)
+                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
+    }
+
+    @Override
     public ResponseEntity<GenericResponseDTO> deleteTypeMachinery(Integer typeMachineryId) {
         try {
             Optional<TypeMachineryEntity> typeMachineryExist = this.typeMachineryRepository.findById(typeMachineryId);
