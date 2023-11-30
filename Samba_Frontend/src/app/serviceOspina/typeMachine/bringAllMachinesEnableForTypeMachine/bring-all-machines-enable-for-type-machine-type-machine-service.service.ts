@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TypeMachineryModel } from 'src/app/commons/domains/typeMachinery/TypeMachineryModel';
 import { TYPE_MACHINERY_BASE_URL, TYPE_MACHINERY_READL_ALL_MACHINES_ENABLE_FOR_TYPE_MACHINERY } from 'src/app/commons/endpoint/typeMachinery/TypeMachineryEndPoint';
 import { GenericResponseDTO } from 'src/app/commons/response/GenericResponseDTO';
 
