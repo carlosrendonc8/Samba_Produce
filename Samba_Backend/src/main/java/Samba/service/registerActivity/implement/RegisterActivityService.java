@@ -45,7 +45,7 @@ public class RegisterActivityService implements IRegisterActivityService {
             Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
             Optional<MachineEntity> machineExist = this.machineRepository.findById(registerActivityDTO.getRegisterActivityMachineId());
             Optional<MachineImplementsEntity> implementsExist = this.implementsRepository.findById(registerActivityDTO.getRegisterActivityImplementMachine());
-            if (registerExist.isEmpty() && machineExist.isPresent() && implementsExist.isPresent()) {
+            if (registerExist.isEmpty() && machineExist.isPresent() && implementsExist.isPresent() && registerActivityDTO.getRegisterActivityHours() <= 12) {
                 RegisterActivityEntity entity = this.registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
                 MachineEntity machineEntity = machineExist.get();
                 String[] codes = {machineEntity.getMachineEngineOilChange(), machineEntity.getMachineOilFilterChange(), machineEntity.getMachineFuelFilterChange(), machineEntity.getMachineHydraulicOilChange(),
