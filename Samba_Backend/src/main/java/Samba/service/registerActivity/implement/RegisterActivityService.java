@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -145,24 +146,66 @@ public class RegisterActivityService implements IRegisterActivityService {
     }
 
     @Override
+    public ResponseEntity<GenericResponseDTO> readAllRegisterActivityForMachine(Integer machineSambaId){
+        try {
+            boolean machineExist = this.machineRepository.existsById(machineSambaId);
+            List<RegisterActivityEntity> registerActivityList = this.registerActivityRepository.findAll();
+            List<RegisterActivityEntity> newListRegisterActivity = new ArrayList<>();
+            if(machineExist && !registerActivityList.isEmpty()){
+                for(RegisterActivityEntity registerActivityEntity : registerActivityList){
+                    if(registerActivityEntity.getRegisterActivityMachineId() == machineSambaId){
+                        newListRegisterActivity.add(registerActivityEntity);
+                    }
+                }
+                return ResponseEntity.ok(GenericResponseDTO.builder()
+                        .message(IRegisterActivityResponse.OPERATION_SUCCESS)
+                        .objectResponse(newListRegisterActivity)
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
+            } else {
+                return ResponseEntity.badRequest().body(GenericResponseDTO.builder()
+                        .message(IRegisterActivityResponse.OPERATION_FAIL)
+                        .objectResponse(IRegisterActivityResponse.NOT_FOUND)
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .build());
+            }
+
+        } catch (Exception e){
+            log.error("Ha ocurrido un error interno", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(GenericResponseDTO.builder()
+                            .message(IRegisterActivityResponse.INTERNAL_SERVER)
+                            .objectResponse(null)
+                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .build());
+        }
+    }
+
+    @Override
     public ResponseEntity<GenericResponseDTO> updateRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
             Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
             Optional<MachineEntity> machineExist = this.machineRepository.findById(registerActivityDTO.getRegisterActivityMachineId());
             Optional<MachineImplementsEntity> implementsExist = this.implementsRepository.findById(registerActivityDTO.getRegisterActivityImplementMachine());
             if (registerExist.isPresent() && machineExist.isPresent() && implementsExist.isPresent()) {
+                MachineEntity machineEntity = machineExist.get();
                 RegisterActivityEntity registerActivityEntity = registerActivityConverter.convertRegisterActivityDTOToRegisterActivityEntity(registerActivityDTO);
-                machineExist.get().setMachineAccumulatedHours(machineExist.get().getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
-                machineExist.get().setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineEngineOilChange(), 250));
-                machineExist.get().setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineOilFilterChange(), 500));
-                machineExist.get().setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFuelFilterChange(), 250));
-                machineExist.get().setMachineHydraulicOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineHydraulicOilChange(), 1000));
-                machineExist.get().setMachineDifferentialOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineDifferentialOilChange(), 1000));
-                machineExist.get().setMachineFrontAxleLubrication(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFrontAxleLubrication(), 250));
-                machineExist.get().setMachinePlanetaryGearOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachinePlanetaryGearOilChange(), 500));
-                machineExist.get().setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineRockerLubrication()));
-                machineExist.get().setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFlannelLubrication()));
-                machineExist.get().setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineCrossheadLubrication()));
+                String[] codes = {machineEntity.getMachineEngineOilChange(), machineEntity.getMachineOilFilterChange(), machineEntity.getMachineFuelFilterChange(), machineEntity.getMachineHydraulicOilChange(),
+                        machineEntity.getMachineDifferentialOilChange(), machineEntity.getMachineFrontAxleLubrication(), machineEntity.getMachinePlanetaryGearOilChange(),
+                        machineEntity.getMachineRockerLubrication(), machineEntity.getMachineFlannelLubrication(), machineEntity.getMachineCrossheadLubrication()};
+                machineEntity.setMachineAccumulatedHours(machineEntity.getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
+                machineEntity.setMachineAccumulatedHours(machineExist.get().getMachineAccumulatedHours() + registerActivityDTO.getRegisterActivityHours());
+                machineEntity.setMachineEngineOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineEngineOilChange(), 250));
+                machineEntity.setMachineOilFilterChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineOilFilterChange(), 500));
+                machineEntity.setMachineFuelFilterChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFuelFilterChange(), 250));
+                machineEntity.setMachineHydraulicOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineHydraulicOilChange(), 1000));
+                machineEntity.setMachineDifferentialOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineDifferentialOilChange(), 1000));
+                machineEntity.setMachineFrontAxleLubrication(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFrontAxleLubrication(), 250));
+                machineEntity.setMachinePlanetaryGearOilChange(this.maintenanceLogic.hoursMaintenanceState(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachinePlanetaryGearOilChange(), 500));
+                machineEntity.setMachineRockerLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineRockerLubrication()));
+                machineEntity.setMachineFlannelLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineFlannelLubrication()));
+                machineEntity.setMachineCrossheadLubrication(this.maintenanceLogic.hoursMaintenance50State(machineExist.get().getMachineAccumulatedHours(), machineExist.get().getMachineCrossheadLubrication()));
+                machineEntity.setMachineState(this.maintenanceLogic.stateTypeMachinery(codes));
                 registerActivityEntity.setRegisterActivityImplementMachine(implementsExist.get().getMachineImplementName());
                 this.registerActivityRepository.save(registerActivityEntity);
                 return ResponseEntity.ok(GenericResponseDTO.builder()
@@ -192,8 +235,8 @@ public class RegisterActivityService implements IRegisterActivityService {
     public ResponseEntity<GenericResponseDTO> deleteRegisterActivity(RegisterActivityDTO registerActivityDTO) {
         try {
             Optional<RegisterActivityEntity> registerExist = this.registerActivityRepository.findById(registerActivityDTO.getRegisterActivityId());
-            if (registerExist.isPresent()) {
-                Optional<MachineEntity> machineExist = this.machineRepository.findById(registerActivityDTO.getRegisterActivityMachineId());
+            Optional<MachineEntity> machineExist = this.machineRepository.findById(registerActivityDTO.getRegisterActivityMachineId());
+            if (registerExist.isPresent() && machineExist.isPresent()) {
                 machineExist.get().setMachineAccumulatedHours(machineExist.get().getMachineAccumulatedHours() - registerActivityDTO.getRegisterActivityHours());
                 this.registerActivityRepository.delete(registerExist.get());
                 return ResponseEntity.ok(GenericResponseDTO.builder()
