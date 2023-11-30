@@ -78,6 +78,11 @@ public class RegisterActivityApi implements IRegisterActivityApi {
         return this.registerActivityService.readAllRegisterActivity();
     }
 
+    @GetMapping(IRegisterActivityEndPoint.READ_ALL_REGISTER_ACTIVITY_FOR_MACHINE)
+    public ResponseEntity<GenericResponseDTO> readAllRegisterActivityForMachine(@PathVariable Integer machineSambaId){
+        return this.registerActivityService.readAllRegisterActivityForMachine(machineSambaId);
+    }
+
     @Override
     @Operation(summary = "actualiza los registros")
     @ApiResponses(value = {
