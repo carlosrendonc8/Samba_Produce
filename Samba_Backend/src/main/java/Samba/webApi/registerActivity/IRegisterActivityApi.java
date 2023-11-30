@@ -13,6 +13,8 @@ public interface IRegisterActivityApi {
     ResponseEntity<GenericResponseDTO> readRegisterActivity(@PathVariable Integer registerActivityId);
     @GetMapping(IRegisterActivityEndPoint.READ_ALL_REGISTER_ACTIVITY)
     ResponseEntity<GenericResponseDTO> readAllRegisterActivity();
+    @GetMapping(IRegisterActivityEndPoint.READ_ALL_REGISTER_ACTIVITY_FOR_MACHINE)
+    ResponseEntity<GenericResponseDTO> readAllRegisterActivityForMachine(@PathVariable Integer machineSambaId);
     @PutMapping(IRegisterActivityEndPoint.UPDATE_REGISTER_ACTIVITY)
     ResponseEntity<GenericResponseDTO> updateRegisterActivity(@RequestBody RegisterActivityDTO registerActivityDTO);
     @DeleteMapping(IRegisterActivityEndPoint.DELETE_REGISTER_ACTIVITY)

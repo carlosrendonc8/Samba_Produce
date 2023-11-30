@@ -27,5 +27,5 @@ public class RegisterActivityEntity {
     @Column(name = "register_activity_implement_machine")
     private String registerActivityImplementMachine;
     @Column(name = "register_activity_machine_id")
-    private String registerActivityMachineId;
+    private Integer registerActivityMachineId;
 }
