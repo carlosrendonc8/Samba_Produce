@@ -77,4 +77,19 @@ public class MaintenanceLogic {
     public boolean needMaintenance(String stateCode){
         return stateCode.charAt(0) == '1' || stateCode.charAt(0) == '2' && stateCode.charAt(1) == '0';
     }
+
+    public String stateTypeMachinery(String[] stateCodes){
+        for(String code : stateCodes){
+            char firstDigit = code.charAt(0);
+            char lastDigit = code.charAt(1);
+            if(firstDigit == '0'){
+                return "HABILITADA";
+            } else if (firstDigit == '1' && lastDigit == '0') {
+                return "PRECAUCION";
+            } else if (firstDigit == '2' && lastDigit == '0') {
+                return "ALERTA";
+            }
+        }
+        return "";
+    }
 }
